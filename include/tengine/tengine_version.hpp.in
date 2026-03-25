@@ -1,0 +1,17 @@
+#pragma once
+#include <string>
+
+namespace tengine {
+
+    inline constexpr int VERSION_MAJOR = @PROJECT_VERSION_MAJOR@;
+    inline constexpr int VERSION_MINOR = @PROJECT_VERSION_MINOR@;
+    inline constexpr int VERSION_PATCH = @PROJECT_VERSION_PATCH@;
+
+    inline const std::string VERSION_STRING = "@PROJECT_VERSION@";
+    inline const std::string ENGINE_NAME = "@PROJECT_NAME@";
+
+    inline const std::string BUILD_TIMESTAMP = "@TENGINE_BUILD_TIME@";
+    inline const std::string BUILD_NOTES = "@TENGINE_BUILD_NOTES@";
+    inline const std::string BUILD_TYPE = "@TENGINE_BUILD_TYPE@";
+
+}
