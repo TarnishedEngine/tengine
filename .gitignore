@@ -1,0 +1,2 @@
+# Ignore CLion-specific files
+.idea/*
