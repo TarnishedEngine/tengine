@@ -1,10 +1,10 @@
 #include <iostream>
-#include <tengine/tengine_version.hpp>
 
-int main() {
+#include <tengine/tengine_build_details.hpp>
 
-    std::cout << tengine::VERSION_STRING << std::endl;
-    std::cout << "Hello from TarnishedEngine!";
+int main(){
+
+    tengine::build_details::printBuildDetails();
 
     return 0;
 

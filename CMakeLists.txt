@@ -12,6 +12,10 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
+set(TENGINE_ARCH "${CMAKE_SYSTEM_PROCESSOR}")
+set(TENGINE_BUILD_TYPE "${CMAKE_BUILD_TYPE}")
+set(TENGINE_PLATFORM "${CMAKE_SYSTEM}")
+
 option(BUILD_TENGINE_TESTS "Build all tengine unit tests" on)
 
 string(TIMESTAMP TENGINE_BUILD_TIME "%Y-%m-%d %H:%M")
@@ -19,8 +23,8 @@ string(TIMESTAMP TENGINE_BUILD_TIME "%Y-%m-%d %H:%M")
 set(TENGINE_BUILD_NOTES "Build notes not specified." CACHE STRING "Custom notes for this build of TarnishedEngine.")
 
 configure_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/tengine/tengine_version.hpp.in
-    ${CMAKE_CURRENT_BINARY_DIR}/generated/tengine/tengine_version.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/tengine/tengine_build_details.hpp.in
+    ${CMAKE_CURRENT_BINARY_DIR}/generated/tengine/tengine_build_details.hpp
 )
 
 set(TENGINE_SOURCES
