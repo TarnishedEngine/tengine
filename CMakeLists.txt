@@ -44,7 +44,7 @@ option(BUILD_TENGINE_TEST_APPLICATION "Build internal tengine test application" 
 
 if(BUILD_TENGINE_TEST_APPLICATION)
 
-    add_executable(TengineTestApp testapp/main.cpp)
+    add_executable(TengineTestApp demo/main.cpp)
     target_link_libraries(TengineTestApp PRIVATE tengine)
 
 endif()
