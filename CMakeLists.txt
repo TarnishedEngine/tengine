@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 project(TarnishedEngine VERSION 0.0.0 LANGUAGES CXX)
+include(FetchContent)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -47,3 +48,21 @@ if(BUILD_TENGINE_TEST_APPLICATION)
     target_link_libraries(TengineTestApp PRIVATE tengine)
 
 endif()
+
+FetchContent_Declare(googletest URL https://github.com/google/googletest/archive/refs/heads/main.zip)
+set(gtest_forced_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+enable_testing()
+
+file(GLOB_RECURSE TEST_SOURCES "tests/*.cpp")
+
+foreach(test_source ${TEST_SOURCES})
+    get_filename_component(test_name ${test_source} NAME_WE)
+    add_executable(${test_name} ${test_source})
+    target_link_libraries(${test_name} PRIVATE tengine gtest_main)
+    include(GoogleTest)
+    gtest_discover_tests(${test_name})
+    message(STATUS "Registered GTest test ${test_name}")
+endforeach()
+
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/tests/data" DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
