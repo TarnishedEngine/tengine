@@ -1,5 +1,5 @@
 /**
- * @file tengine_build_details.hpp.in
+ * @file tengine_build_details.hpp
  * @brief Template header that contains build details. Filled in my CMake when building.
  * @author DIY Labs
  */
@@ -27,7 +27,7 @@ inline const std::string SYSTEM_ARCHITECTURE = "@TENGINE_ARCH@";
 /**
  * @brief Prints build details to standard output.
  */
-void printBuildDetails(){
+inline void printBuildDetails(){
 
     std::cout << tengine::build_details::BUILD_ENGINE_NAME << " version " << tengine::build_details::BUILD_VERSION_STRING << " build type " << tengine::build_details::BUILD_TYPE << std::endl;
     std::cout << tengine::build_details::BUILD_NOTES << std::endl;
