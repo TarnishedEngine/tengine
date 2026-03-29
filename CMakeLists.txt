@@ -32,6 +32,11 @@ set(TENGINE_SOURCES
         src/tengine/temp.cpp
         include/tengine/util/logger/ILogSink.hpp
         include/tengine/util/logger/LogLevel.hpp
+        include/tengine/util/logger/Logger.cpp
+        include/tengine/util/logger/Logger.hpp
+        include/tengine/util/logger/Logger.hpp
+        include/tengine/util/logger/sinks/FileSink.hpp
+        src/tengine/util/logger/sinks/FileSink.cpp
         # tengine cpp files
 )
 
