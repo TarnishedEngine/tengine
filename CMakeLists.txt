@@ -30,6 +30,8 @@ configure_file(
 
 set(TENGINE_SOURCES
         src/tengine/temp.cpp
+        include/tengine/util/logger/ILogSink.hpp
+        include/tengine/util/logger/LogLevel.hpp
         # tengine cpp files
 )
 
@@ -65,4 +67,4 @@ foreach(test_source ${TEST_SOURCES})
     message(STATUS "Registered GTest test ${test_name}")
 endforeach()
 
-file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/tests/data" DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/tests/testdata" DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")

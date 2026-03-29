@@ -3,7 +3,7 @@
 
 TEST(Sanity, ReadFileFromData){
 
-  std::ifstream f("data/sanity/does_this_file_exist.txt");
+  std::ifstream f("testdata/sanity/does_this_file_exist.txt");
   EXPECT_TRUE(f.is_open());
 
 }
