@@ -10,6 +10,17 @@
 
 namespace tengine::util::logger{
 
+FileSink::~FileSink() {
+
+  if(m_logFile.is_open()) {
+
+    m_logFile.flush();
+    m_logFile.close();
+
+  }
+
+}
+
 FileSink::FileSink(const std::string &path){
   m_logFile.open(path, std::ios::out | std::ios::trunc);
 }
@@ -44,7 +55,7 @@ const char* FileSink::getLevelString(tengine::util::logger::LogLevel level) {
 
 }
 
-string FileSink::getTimestamp() {
+std::string FileSink::getTimestamp() {
 
   auto now = std::chrono::system_clock::now();
   time_t time = std::chrono::system_clock::to_time_t(now);

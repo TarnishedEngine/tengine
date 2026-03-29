@@ -24,7 +24,7 @@ private:
   std::ofstream m_logFile;
   std::mutex m_fileMutex;
   const char* getLevelString(tengine::util::logger::LogLevel level);
-  string getTimestamp();
+  std::string getTimestamp();
 
 };
 
