@@ -37,6 +37,7 @@ set(TENGINE_SOURCES
         src/tengine/util/logger/sinks/FileSink.cpp
         src/tengine/util/logger/Logger.cpp
         include/tengine/util/logger/LoggerMacros.hpp
+        include/tengine/util/logger/sinks/TerminalSink.hpp
 )
 
 add_library(tengine ${TENGINE_SOURCES})
@@ -44,6 +45,8 @@ add_library(tengine ${TENGINE_SOURCES})
 target_include_directories(tengine PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_BINARY_DIR}/generated
+    ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/include
+
 )
 
 option(BUILD_TENGINE_TEST_APPLICATION "Build internal tengine test application" ON)

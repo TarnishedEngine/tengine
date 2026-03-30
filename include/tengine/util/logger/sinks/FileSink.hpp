@@ -1,5 +1,5 @@
 /**
- * @brief Implements an ILogSink that dumps logs to a file
+ * @brief Defines an ILogSink that dumps logs to a file
  * @author DIY Labs
  */
 
