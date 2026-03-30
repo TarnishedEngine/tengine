@@ -19,7 +19,6 @@ public:
   ~FileSink() override;
   void receiveLog(const tengine::util::logger::LogLevel level, const std::string &sender, const std::string &message) override;
 
-
 private:
   std::ofstream m_logFile;
   std::mutex m_fileMutex;

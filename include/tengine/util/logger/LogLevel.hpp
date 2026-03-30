@@ -9,6 +9,7 @@ namespace tengine::util::logger{
 
 enum class LogLevel{
 
+  DEBUG,
   INFO,
   WARN,
   ERROR,
