@@ -31,7 +31,7 @@ void Logger::log(tengine::util::logger::LogLevel level, const std::string& sende
       sink->receiveLog(level, sender, message);
     }
     else{
-      safeInternalLog(tengine::util::logger::LogLevel::ERROR, "Logger", "Null sink when attempting to log");
+      safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Null sink when attempting to log");
     }
 
   }
@@ -41,7 +41,7 @@ void Logger::log(tengine::util::logger::LogLevel level, const std::string& sende
 void Logger::addSink(std::shared_ptr<ILogSink> sink){
 
   if(!sink){
-    safeInternalLog(tengine::util::logger::LogLevel::ERROR, "Logger", "Attempted to add null sink");
+    safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Attempted to add null sink");
   }
 
   std::lock_guard<std::mutex> lock(m_mutex);

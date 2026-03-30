@@ -9,12 +9,14 @@ namespace tengine::util::logger{
 
 enum class LogLevel{
 
-  DEBUG,
-  INFO,
-  WARN,
-  ERROR,
-  FATAL
+  LEVEL_DEBUG,
+  LEVEL_INFO,
+  LEVEL_WARN,
+  LEVEL_ERROR,
+  LEVEL_FATAL
 
 };
+
+// TODO: consider adding a level-to-string converter
 
 }

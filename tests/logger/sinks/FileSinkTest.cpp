@@ -22,7 +22,7 @@ TEST_F(FileSinkTest, WritesLogToFile){
 
   {
     tengine::util::logger::FileSink sink(testFileName);
-    sink.receiveLog(tengine::util::logger::LogLevel::INFO, "GTest Test Sender", "Hello, World!");
+    sink.receiveLog(tengine::util::logger::LogLevel::LEVEL_INFO, "GTest Test Sender", "Hello, World!");
   }
 
   std::ifstream file(testFileName);
@@ -31,7 +31,7 @@ TEST_F(FileSinkTest, WritesLogToFile){
   std::string line;
   std::getline(file, line);
 
-  EXPECT_NE(line.find("INFO"), std::string::npos);
+  EXPECT_NE(line.find("LEVEL_INFO"), std::string::npos);
   EXPECT_NE(line.find("GTest Test Sender"), std::string::npos);
   EXPECT_NE(line.find("Hello, World!"), std::string::npos);
 

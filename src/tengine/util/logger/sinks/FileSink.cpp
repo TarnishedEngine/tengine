@@ -45,10 +45,11 @@ const char* FileSink::getLevelString(tengine::util::logger::LogLevel level) {
 
   switch(level){
 
-    case tengine::util::logger::LogLevel::INFO: return "INFO";
-    case tengine::util::logger::LogLevel::WARN: return "WARN";
-    case tengine::util::logger::LogLevel::ERROR: return "ERROR";
-    case tengine::util::logger::LogLevel::FATAL: return "FATAL";
+    case tengine::util::logger::LogLevel::LEVEL_DEBUG: return "DEBUG";
+    case tengine::util::logger::LogLevel::LEVEL_INFO: return "INFO";
+    case tengine::util::logger::LogLevel::LEVEL_WARN: return "WARN";
+    case tengine::util::logger::LogLevel::LEVEL_ERROR: return "ERROR";
+    case tengine::util::logger::LogLevel::LEVEL_FATAL: return "FATAL";
     default: return "Unknown log level";
 
   }
