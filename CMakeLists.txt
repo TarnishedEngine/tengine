@@ -39,6 +39,7 @@ set(TENGINE_SOURCES
         include/tengine/util/logger/LoggerMacros.hpp
         include/tengine/util/logger/sinks/TerminalSink.hpp
         src/tengine/util/logger/sinks/TerminalSink.cpp
+        include/tengine/util/logger/Filter.hpp
 )
 
 add_library(tengine ${TENGINE_SOURCES})

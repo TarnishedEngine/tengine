@@ -10,6 +10,7 @@
 #include <mutex>
 #include <tengine/util/logger/ILogSink.hpp>
 #include <tengine/util/logger/LogLevel.hpp>
+#include <tengine/util/logger/Filter.hpp>
 
 namespace tengine::util::logger{
 
@@ -23,9 +24,9 @@ public:
     return instance;
   }
 
-  void init();
+  void init(); // TODO: getInstance().log() calls before init() are allowed and not properly dealt with. TODO: Automatically call init() when instance is requested, and don' re-add internal sink if init() is called multiple times
   void log(tengine::util::logger::LogLevel level, const std::string& sender, const std::string& message);
-  void addSink(std::shared_ptr<tengine::util::logger::ILogSink> sink);
+  void addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink, const tengine::util::logger::LogFilter filter);
   void clearSinks();
 
   // Refuse all constructors, force Logger::getInstance()
@@ -37,9 +38,12 @@ public:
 private:
   Logger() = default;
   void safeInternalLog(tengine::util::logger::LogLevel level, const std::string& sender, const std::string& message);
+  bool filterBySender(std::string sender, tengine::util::logger::LogFilter filter);
+  bool filterByLevel(tengine::util::logger::LogLevel level, tengine::util::logger::LogFilter filter);
 
   std::shared_ptr<tengine::util::logger::ILogSink> m_internalSink;
   std::vector<std::shared_ptr<tengine::util::logger::ILogSink>> m_logSinks;
+  std::vector<tengine::util::logger::LogFilter> m_logFilters;
   std::mutex m_mutex;
 
 };

@@ -13,9 +13,11 @@ int main(){
 
     tengine::build_details::printBuildDetails();
 
+    tengine::util::logger::LogFilter allowEverythingThrough;
+
     TENGINE_GET_LOGGER.init();
-    TENGINE_GET_LOGGER.addSink(terminalSink);
-    TENGINE_GET_LOGGER.addSink(fileSink);
+    TENGINE_GET_LOGGER.addSink(terminalSink, allowEverythingThrough);
+    TENGINE_GET_LOGGER.addSink(fileSink, allowEverythingThrough);
     TENGINE_LOG_DEBUG("main()", "Debug Log!");
     TENGINE_LOG_INFO("main()", "Info Log!");
     TENGINE_LOG_WARN("main()", "Warn Log!");

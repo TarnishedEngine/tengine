@@ -25,20 +25,43 @@ void Logger::log(tengine::util::logger::LogLevel level, const std::string& sende
 
   std::lock_guard<std::mutex> lock(m_mutex);
 
-  for(auto& sink : m_logSinks){
+  for(int i = 0; i < m_logSinks.size(); i++){
 
-    if(sink){
-      sink->receiveLog(level, sender, message);
-    }
+    auto& sink = m_logSinks[i];
+    auto& filter = m_logFilters[i];
+
+    if(!sink){  safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Null sink at position " + std::to_string(i) + " when attempting to log");  }
     else{
-      safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Null sink when attempting to log");
+
+      switch(filter.filterMode){
+
+        case FILTER_NO_FILTER:
+          sink->receiveLog(level, sender, message);
+          break;
+
+        case FILTER_ALLOW_SENDER:
+        case FILTER_DISALLOW_SENDER:
+          if(filterBySender(sender, filter)){  sink->receiveLog(level, sender, message); }
+          break;
+
+        case FILTER_ALLOW_LOG_LEVEL:
+        case FILTER_DISALLOW_LOG_LEVEL:
+          if(filterByLevel(level, filter)){  sink->receiveLog(level, sender, message); }
+          break;
+
+        default:
+          sink->receiveLog(level, sender, message);
+          break;
+
+      }
+
     }
 
   }
 
 }
 
-void Logger::addSink(std::shared_ptr<ILogSink> sink){
+void Logger::addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink, const tengine::util::logger::LogFilter filter){
 
   if(!sink){
     safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Attempted to add null sink");
@@ -46,6 +69,7 @@ void Logger::addSink(std::shared_ptr<ILogSink> sink){
 
   std::lock_guard<std::mutex> lock(m_mutex);
   m_logSinks.push_back(sink);
+  m_logFilters.push_back(filter);
 
 }
 
@@ -65,6 +89,54 @@ void Logger::safeInternalLog(tengine::util::logger::LogLevel level, const std::s
     std::cerr << "TENGINE FATAL ERROR: Logger's internal FileSink init is null when attempting to log." << std::endl;
     std::abort();
   }
+
+}
+
+bool Logger::filterBySender(std::string sender, tengine::util::logger::LogFilter filter){
+
+  if(filter.senderList.empty()){
+    safeInternalLog(LogLevel::LEVEL_WARN, "Logger", "filterBySender received a filter with an empty sender list");
+    return true;  // Pass on message through anyway
+  }
+
+  bool found = false;
+  for(std::string s : filter.senderList){
+
+    if(s == sender) {
+      found = true;
+      break;
+    }
+
+  }
+
+  if(filter.filterMode == FILTER_ALLOW_SENDER){  return found; }
+  else if(filter.filterMode == FILTER_DISALLOW_SENDER){  return !found; }
+
+  return true;
+
+}
+
+bool Logger::filterByLevel(tengine::util::logger::LogLevel level, tengine::util::logger::LogFilter filter){
+
+  if(filter.levelList.empty()){
+    safeInternalLog(LogLevel::LEVEL_WARN, "Logger", "filterByLevel received a filter with an empty level list");
+    return true;  // Pass on message through anyway
+  }
+
+  bool found = false;
+  for(tengine::util::logger::LogLevel l : filter.levelList){
+
+    if(l == level) {
+      found = true;
+      break;
+    }
+
+  }
+
+  if(filter.filterMode == FILTER_ALLOW_LOG_LEVEL){  return found; }
+  else if(filter.filterMode == FILTER_DISALLOW_LOG_LEVEL){  return !found; }
+
+  return true;
 
 }
 
