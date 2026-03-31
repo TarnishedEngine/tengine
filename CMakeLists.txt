@@ -77,3 +77,4 @@ foreach(test_source ${TEST_SOURCES})
 endforeach()
 
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/tests/testdata" DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/tengine-internal-assets" DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
