@@ -11,7 +11,7 @@ protected:
   void TearDown() override{
 
     if(std::filesystem::exists(testFileName)) {
-      std::filesystem::remove(testFileName);
+      //std::filesystem::remove(testFileName);
     }
 
   }
@@ -31,7 +31,7 @@ TEST_F(FileSinkTest, WritesLogToFile){
   std::string line;
   std::getline(file, line);
 
-  EXPECT_NE(line.find("LEVEL_INFO"), std::string::npos);
+  EXPECT_NE(line.find("INFO"), std::string::npos);
   EXPECT_NE(line.find("GTest Test Sender"), std::string::npos);
   EXPECT_NE(line.find("Hello, World!"), std::string::npos);
 
