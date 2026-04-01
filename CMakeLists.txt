@@ -60,6 +60,12 @@ if(BUILD_TENGINE_TEST_APPLICATION)
 
 endif()
 
+FetchContent_Declare(libconfig GIT_REPOSITORY https://github.com/hyperrealm/libconfig.git GIT_TAG master)
+set(LIBCONFIG_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(LIBCONFIG_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(libconfig)
+target_link_libraries(tengine PUBLIC libconfig++)
+
 FetchContent_Declare(googletest URL https://github.com/google/googletest/archive/refs/heads/main.zip)
 set(gtest_forced_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
