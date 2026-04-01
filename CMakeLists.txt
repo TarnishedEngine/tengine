@@ -24,8 +24,8 @@ string(TIMESTAMP TENGINE_BUILD_TIME "%Y-%m-%d %H:%M")
 set(TENGINE_BUILD_NOTES "Build notes not specified." CACHE STRING "Custom notes for this build of TarnishedEngine.")
 
 configure_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/tengine/tengine_build_details.hpp.in
-    ${CMAKE_CURRENT_BINARY_DIR}/generated/tengine/tengine_build_details.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/tengine/tengine_build_details.hpp.in
+        ${CMAKE_CURRENT_BINARY_DIR}/generated/tengine/tengine_build_details.hpp
 )
 
 set(TENGINE_SOURCES
@@ -45,9 +45,9 @@ set(TENGINE_SOURCES
 add_library(tengine ${TENGINE_SOURCES})
 
 target_include_directories(tengine PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${CMAKE_CURRENT_BINARY_DIR}/generated
-    ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_BINARY_DIR}/generated
+        ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/include
 
 )
 
@@ -59,12 +59,6 @@ if(BUILD_TENGINE_TEST_APPLICATION)
     target_link_libraries(tenginedemo PRIVATE tengine)
 
 endif()
-
-FetchContent_Declare(libconfig GIT_REPOSITORY https://github.com/hyperrealm/libconfig.git GIT_TAG master)
-set(LIBCONFIG_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-set(LIBCONFIG_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(libconfig)
-target_link_libraries(tengine PUBLIC libconfig++)
 
 FetchContent_Declare(googletest URL https://github.com/google/googletest/archive/refs/heads/main.zip)
 set(gtest_forced_shared_crt ON CACHE BOOL "" FORCE)
