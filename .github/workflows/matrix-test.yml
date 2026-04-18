@@ -24,7 +24,7 @@ jobs:
         cmake -B ${{ github.workspace }}/build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
 
     - name: Build Engine
-      run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build_type }}
+      run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build_type }} -DTENGINE_BUILD_NOTES:STRING="Compiled with machine love"
 
     - name: Run GTest 
       working-directory: ${{ github.workspace }}/build
