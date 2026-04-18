@@ -1,8 +1,10 @@
 # Ignore CLion-specific files
 .idea/*
 
-# Ignore CMake build folder
+# Ignore CMake build folders
 cmake-build-debug/*
+cmake-build-demo/*
+cmake-build-release/*
 
 # Ignore Doxygen-generated files
 docs/*
