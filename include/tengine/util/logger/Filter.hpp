@@ -1,5 +1,6 @@
 /**
  * @brief Defines a set of structs that handle filtering
+ * @note NERE!!
  * @author DIY Labs
  */
 
