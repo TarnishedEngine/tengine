@@ -60,6 +60,22 @@ TEST_F(LoggerTests, LoggerDispatchesToSinks){
 
 }
 
+TEST_F(LoggerTests, LoggerDispatchesToSinkWithDefaultFilter){
+
+  auto& logger = tengine::util::logger::Logger::getInstance();
+  auto dummySink = std::make_shared<DummySink>();
+
+  logger.addSink(dummySink);
+
+  logger.log(tengine::util::logger::LogLevel::LEVEL_DEBUG, "GTest Test", "Hello, Tarnished!");
+
+  ASSERT_EQ(dummySink->logs.size(), 1);
+  ASSERT_EQ(dummySink->logs[0].level, tengine::util::logger::LogLevel::LEVEL_DEBUG);
+  ASSERT_EQ(dummySink->logs[0].sender, "GTest Test");
+  ASSERT_EQ(dummySink->logs[0].message, "Hello, Tarnished!");
+
+}
+
 TEST_F(LoggerTests, MultipleSinksReceiveLogs){
 
   auto& logger = tengine::util::logger::Logger::getInstance();

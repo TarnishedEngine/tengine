@@ -61,7 +61,7 @@ void Logger::log(tengine::util::logger::LogLevel level, const std::string& sende
 
 }
 
-void Logger::addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink, const tengine::util::logger::LogFilter filter){
+  void Logger::addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink, const tengine::util::logger::LogFilter filter){
 
   if(!sink){
     safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Attempted to add null sink");
@@ -73,7 +73,19 @@ void Logger::addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink
 
 }
 
-void Logger::clearSinks(){
+void Logger::addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink){
+
+  if(!sink){
+    safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Attempted to add null sink");
+  }
+
+  std::lock_guard<std::mutex> lock(m_mutex);
+  m_logSinks.push_back(sink);
+  m_logFilters.push_back(m_defaultFilter);
+
+}
+
+  void Logger::clearSinks(){
 
   std::lock_guard<std::mutex> lock(m_mutex);
   m_logSinks.clear();
