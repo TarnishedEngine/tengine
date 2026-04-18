@@ -3,8 +3,8 @@
 #include <vector>
 #include <tengine/util/logger/sinks/FileSink.hpp>
 #include <tengine/util/logger/Filter.hpp>
-
 #include "tengine/util/logger/Logger.hpp"
+#include <tengine/tengine_build_details.hpp>
 
 struct CapturedLog{
 
@@ -33,8 +33,11 @@ class LoggerTests : public ::testing::Test{
 protected:
 
   void SetUp() override{
+
+    tengine::build_details::printBuildDetails();
     tengine::util::logger::Logger::getInstance().clearSinks();
     tengine::util::logger::Logger::getInstance().init();
+
   }
 
   void TearDown() override{

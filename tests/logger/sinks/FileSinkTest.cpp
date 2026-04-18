@@ -2,6 +2,7 @@
 #include <fstream>
 #include <filesystem>
 #include <tengine/util/logger/sinks/FileSink.hpp>
+#include <tengine/tengine_build_details.hpp>
 
 class FileSinkTest : public ::testing::Test{
 
@@ -11,7 +12,7 @@ protected:
   void TearDown() override{
 
     if(std::filesystem::exists(testFileName)) {
-      //std::filesystem::remove(testFileName);
+      std::filesystem::remove(testFileName);
     }
 
   }
@@ -19,6 +20,8 @@ protected:
 };
 
 TEST_F(FileSinkTest, WritesLogToFile){
+
+  tengine::build_details::printBuildDetails();
 
   {
     tengine::util::logger::FileSink sink(testFileName);
