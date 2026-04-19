@@ -26,7 +26,7 @@ TEST(CFGParserTests, SingleNodeParsing){
 
 }
 
-TEST(CFGParserTestS, NestedNodeParsing){
+TEST(CFGParserTests, NestedNodeParsing){
 
   std::string config = R"(
         Parent {
