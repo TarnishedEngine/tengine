@@ -49,6 +49,7 @@ set(TENGINE_HEADERS
         include/tengine/util/logger/LogLevel.hpp
         include/tengine/util/logger/sinks/FileSink.hpp
         include/tengine/util/logger/sinks/TerminalSink.hpp
+        include/tengine/util/cfgparse/CFGNode.hpp
 )
 
 add_library(tengine ${TENGINE_SOURCES} ${TENGINE_HEADERS})
