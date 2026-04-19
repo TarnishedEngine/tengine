@@ -36,6 +36,11 @@ configure_file(
 
 
 
+FetchContent_Declare(fmt GIT_REPOSITORY https://github.com/fmtlib/fmt.git GIT_TAG 12.1.0)
+FetchContent_MakeAvailable(fmt)
+
+
+
 set(TENGINE_SOURCES
         src/tengine/util/logger/Logger.cpp
         src/tengine/util/logger/sinks/TerminalSink.cpp
@@ -53,6 +58,7 @@ set(TENGINE_HEADERS
 )
 
 add_library(tengine ${TENGINE_SOURCES} ${TENGINE_HEADERS})
+target_link_libraries(tengine PUBLIC fmt::fmt)
 
 target_include_directories(tengine PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
