@@ -5,9 +5,12 @@
 
 namespace tengine::util::logger{
 
-void Logger::init(){
+void Logger::m_init(){
 
-  if(m_initComplete) return;
+  if(m_initComplete){
+    m_safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger::m_Init", "Init called when m_initComplete is true, this should not have happened");
+    return;
+  }
 
   std::lock_guard<std::mutex> lock(m_mutex);
   m_internalSink = std::make_shared<FileSink>("tengine-internal.log");
@@ -15,7 +18,7 @@ void Logger::init(){
   // If m_internalSink is null for any reason, give up
   // TODO: Rework with UI message?
   if(!m_internalSink){
-    std::cerr << "TENGINE FATAL ERROR: Logger's internal FileSink init failed." << std::endl;
+    std::cerr << "TENGINE FATAL ERROR: Logger's internal FileSink m_init failed." << std::endl;
     std::abort();
   }
 
@@ -107,7 +110,7 @@ void Logger::m_safeInternalLog(tengine::util::logger::LogLevel level, const std:
     m_internalSink->receiveLog(level, sender, message);
   }
   else{
-    std::cerr << "TENGINE FATAL ERROR: Logger's internal FileSink init is null when attempting to log." << std::endl;
+    std::cerr << "TENGINE FATAL ERROR: Logger's internal FileSink m_init is null when attempting to log." << std::endl;
     std::abort();
   }
 
@@ -163,7 +166,7 @@ bool Logger::m_filterByLevel(tengine::util::logger::LogLevel level, tengine::uti
 
 void Logger::m_checkInit(){
 
-  if(!m_initComplete) init();
+  if(!m_initComplete) m_init();
 
 }
 }

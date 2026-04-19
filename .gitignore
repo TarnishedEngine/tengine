@@ -5,6 +5,7 @@
 cmake-build-debug/*
 cmake-build-demo/*
 cmake-build-release/*
+cmake-build-test/*
 
 # Ignore Doxygen-generated files
 docs/*

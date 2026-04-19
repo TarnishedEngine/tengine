@@ -24,7 +24,6 @@ public:
     return instance;
   }
 
-  void init(); // TODO: getInstance().log() calls before init() are allowed and not properly dealt with. TODO: Automatically call init() when instance is requested, and don' re-add internal sink if init() is called multiple times
   void log(tengine::util::logger::LogLevel level, const std::string& sender, const std::string& message);
   void addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink, const tengine::util::logger::LogFilter filter);
   void addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink);
@@ -41,6 +40,7 @@ private:
   void m_safeInternalLog(tengine::util::logger::LogLevel level, const std::string& sender, const std::string& message);
   bool m_FilterBySender(std::string sender, tengine::util::logger::LogFilter filter);
   bool m_filterByLevel(tengine::util::logger::LogLevel level, tengine::util::logger::LogFilter filter);
+  void m_init();
 
   void m_checkInit();
   bool m_initComplete = false;

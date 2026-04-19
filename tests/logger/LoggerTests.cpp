@@ -36,7 +36,6 @@ protected:
 
     tengine::build_details::printBuildDetails();
     tengine::util::logger::Logger::getInstance().clearSinks();
-    tengine::util::logger::Logger::getInstance().init();
 
   }
 

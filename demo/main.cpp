@@ -16,7 +16,6 @@ int main(){
 
     tengine::util::logger::LogFilter allowEverythingThrough;
 
-    TENGINE_GET_LOGGER.init();
     TENGINE_GET_LOGGER.addSink(terminalSink, allowEverythingThrough);
     TENGINE_GET_LOGGER.addSink(fileSink, allowEverythingThrough);
     TENGINE_LOG_DEBUG("main()", "Debug Log!");
