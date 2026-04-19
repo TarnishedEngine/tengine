@@ -34,6 +34,10 @@ struct CFGNode{
 
   }
 
+  /***
+   * @param key Key whose value to convert to an integer
+   * @param fallback Fallback value in case key does not exist
+   */
   std::int64_t getInteger(const std::string& key, int64_t fallback = 0){
 
     auto val = getStringValue(key);
@@ -42,7 +46,7 @@ struct CFGNode{
     try{
       return std::stoll(*val);
     }
-    catch(const std::exception e){
+    catch(const std::exception& e){
       TENGINE_LOG_ERROR("CFGNode::getInt()", fmt::format("Caught exception {} when trying to parse key {}'s value {} as int64 ", key, *val, e.what()));
     }
 
@@ -50,7 +54,11 @@ struct CFGNode{
 
   }
 
-  long double getFloat(const std::string& key, long double fallback = 0.0f){
+  /***
+   * @param key Key whose value to convert to a floating-point
+   * @param fallback Fallback value in case key does not exist
+   */
+  long double getFloat(const std::string& key, long double fallback = 0.0l){
 
     auto val = getStringValue(key);
     if(!val) return fallback;
@@ -58,7 +66,7 @@ struct CFGNode{
     try{
       return std::stold(*val);
     }
-    catch(const std::exception e){
+    catch(const std::exception& e){
       TENGINE_LOG_ERROR("CFGNode::getFloat()", fmt::format("Caught exception {} when trying to parse key {}'s value {} as long double ", key, *val, e.what()));
     }
 
@@ -66,6 +74,10 @@ struct CFGNode{
 
   }
 
+  /***
+ * @param key Key whose value to convert to a boolean
+ * @param fallback Fallback value in case key does not exist
+ */
   bool getBoolean(const std::string& key, bool fallback = false){
 
     auto val = getStringValue(key);
