@@ -19,6 +19,7 @@ namespace tengine::util::cfg{
 
 struct CFGNode{
 
+  std::string nodeName;
   std::vector<CFGNode> children;
   std::map<std::string, std::string> values;
 
