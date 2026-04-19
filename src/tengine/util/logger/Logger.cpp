@@ -7,6 +7,8 @@ namespace tengine::util::logger{
 
 void Logger::init(){
 
+  if(m_initComplete) return;
+
   std::lock_guard<std::mutex> lock(m_mutex);
   m_internalSink = std::make_shared<FileSink>("tengine-internal.log");
 
@@ -21,7 +23,8 @@ void Logger::init(){
 
 void Logger::log(tengine::util::logger::LogLevel level, const std::string& sender, const std::string& message) {
 
-  safeInternalLog(level, sender, message);
+  m_checkInit();
+  m_safeInternalLog(level, sender, message);
 
   std::lock_guard<std::mutex> lock(m_mutex);
 
@@ -30,7 +33,7 @@ void Logger::log(tengine::util::logger::LogLevel level, const std::string& sende
     auto& sink = m_logSinks[i];
     auto& filter = m_logFilters[i];
 
-    if(!sink){  safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Null sink at position " + std::to_string(i) + " when attempting to log");  }
+    if(!sink){  m_safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Null sink at position " + std::to_string(i) + " when attempting to log");  }
     else{
 
       switch(filter.filterMode){
@@ -41,12 +44,12 @@ void Logger::log(tengine::util::logger::LogLevel level, const std::string& sende
 
         case FILTER_ALLOW_SENDER:
         case FILTER_DISALLOW_SENDER:
-          if(filterBySender(sender, filter)){  sink->receiveLog(level, sender, message); }
+          if(m_FilterBySender(sender, filter)){  sink->receiveLog(level, sender, message); }
           break;
 
         case FILTER_ALLOW_LOG_LEVEL:
         case FILTER_DISALLOW_LOG_LEVEL:
-          if(filterByLevel(level, filter)){  sink->receiveLog(level, sender, message); }
+          if(m_filterByLevel(level, filter)){  sink->receiveLog(level, sender, message); }
           break;
 
         default:
@@ -61,10 +64,12 @@ void Logger::log(tengine::util::logger::LogLevel level, const std::string& sende
 
 }
 
-  void Logger::addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink, const tengine::util::logger::LogFilter filter){
+void Logger::addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink, const tengine::util::logger::LogFilter filter){
+
+  m_checkInit();
 
   if(!sink){
-    safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Attempted to add null sink");
+    m_safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Attempted to add null sink");
   }
 
   std::lock_guard<std::mutex> lock(m_mutex);
@@ -75,8 +80,10 @@ void Logger::log(tengine::util::logger::LogLevel level, const std::string& sende
 
 void Logger::addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink){
 
+  m_checkInit();
+
   if(!sink){
-    safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Attempted to add null sink");
+    m_safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Attempted to add null sink");
   }
 
   std::lock_guard<std::mutex> lock(m_mutex);
@@ -85,14 +92,16 @@ void Logger::addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink
 
 }
 
-  void Logger::clearSinks(){
+void Logger::clearSinks(){
+
+  m_checkInit();
 
   std::lock_guard<std::mutex> lock(m_mutex);
   m_logSinks.clear();
 
 }
 
-void Logger::safeInternalLog(tengine::util::logger::LogLevel level, const std::string &sender, const std::string &message){
+void Logger::m_safeInternalLog(tengine::util::logger::LogLevel level, const std::string &sender, const std::string &message){
 
   if(m_internalSink){
     m_internalSink->receiveLog(level, sender, message);
@@ -104,10 +113,10 @@ void Logger::safeInternalLog(tengine::util::logger::LogLevel level, const std::s
 
 }
 
-bool Logger::filterBySender(std::string sender, tengine::util::logger::LogFilter filter){
+bool Logger::m_FilterBySender(std::string sender, tengine::util::logger::LogFilter filter){
 
   if(filter.senderList.empty()){
-    safeInternalLog(LogLevel::LEVEL_WARN, "Logger", "filterBySender received a filter with an empty sender list");
+    m_safeInternalLog(LogLevel::LEVEL_WARN, "Logger", "m_FilterBySender received a filter with an empty sender list");
     return true;  // Pass on message through anyway
   }
 
@@ -128,10 +137,10 @@ bool Logger::filterBySender(std::string sender, tengine::util::logger::LogFilter
 
 }
 
-bool Logger::filterByLevel(tengine::util::logger::LogLevel level, tengine::util::logger::LogFilter filter){
+bool Logger::m_filterByLevel(tengine::util::logger::LogLevel level, tengine::util::logger::LogFilter filter){
 
   if(filter.levelList.empty()){
-    safeInternalLog(LogLevel::LEVEL_WARN, "Logger", "filterByLevel received a filter with an empty level list");
+    m_safeInternalLog(LogLevel::LEVEL_WARN, "Logger", "m_filterByLevel received a filter with an empty level list");
     return true;  // Pass on message through anyway
   }
 
@@ -152,4 +161,9 @@ bool Logger::filterByLevel(tengine::util::logger::LogLevel level, tengine::util:
 
 }
 
+void Logger::m_checkInit(){
+
+  if(!m_initComplete) init();
+
+}
 }

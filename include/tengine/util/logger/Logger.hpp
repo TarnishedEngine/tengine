@@ -38,9 +38,12 @@ public:
 
 private:
   Logger() = default;
-  void safeInternalLog(tengine::util::logger::LogLevel level, const std::string& sender, const std::string& message);
-  bool filterBySender(std::string sender, tengine::util::logger::LogFilter filter);
-  bool filterByLevel(tengine::util::logger::LogLevel level, tengine::util::logger::LogFilter filter);
+  void m_safeInternalLog(tengine::util::logger::LogLevel level, const std::string& sender, const std::string& message);
+  bool m_FilterBySender(std::string sender, tengine::util::logger::LogFilter filter);
+  bool m_filterByLevel(tengine::util::logger::LogLevel level, tengine::util::logger::LogFilter filter);
+
+  void m_checkInit();
+  bool m_initComplete = false;
 
   std::shared_ptr<tengine::util::logger::ILogSink> m_internalSink;
   std::vector<std::shared_ptr<tengine::util::logger::ILogSink>> m_logSinks;
