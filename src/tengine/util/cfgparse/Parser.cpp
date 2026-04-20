@@ -110,8 +110,3 @@ void CFGParser::parseScope(std::istream& is, CFGNode& currentNode){
 }
 
 }
-
-
-
-
-

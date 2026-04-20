@@ -29,7 +29,6 @@ void TerminalSink::receiveLog(tengine::util::logger::LogLevel level, const std::
        printFormattedMessage(level, sender, message, termcolor::bright_red);
        break;
 
-
    }
 
 }

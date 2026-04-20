@@ -1,0 +1,14 @@
+te_core_config{
+
+    log_files{
+
+        debug = "/logs/debug.log"
+        info = "/logs/info.log"
+        warning = "/logs/warning.log"
+        error = "/logs/error.log"
+        fatal = "/logs/fatal.log"
+        everything = "logs/main.log"
+
+    }
+
+}

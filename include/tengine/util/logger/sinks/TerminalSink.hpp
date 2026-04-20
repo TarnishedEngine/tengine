@@ -5,6 +5,8 @@
 
 #pragma once
 
+#warning "DEPRECATED!!!"
+
 #include <functional>
 #include <tengine/util/logger/ILogSink.hpp>
 #include <tengine/util/logger/LogLevel.hpp>
