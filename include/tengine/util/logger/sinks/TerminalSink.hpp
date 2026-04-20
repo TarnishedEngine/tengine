@@ -5,8 +5,6 @@
 
 #pragma once
 
-#warning "DEPRECATED!!!"
-
 #include <functional>
 #include <tengine/util/logger/ILogSink.hpp>
 #include <tengine/util/logger/LogLevel.hpp>
@@ -14,7 +12,7 @@
 
 namespace tengine::util::logger{
 
-class TerminalSink : public ILogSink{
+class [[deprecated("TerminalSink is deprecated, do not use")]] TerminalSink : public ILogSink{
 
 public:
   TerminalSink() = default;
