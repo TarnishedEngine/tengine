@@ -1,5 +1,12 @@
+// Core config file for TarnishedEngine.
+// The path to this file is hard-coded into the orchestrator.
+// Things *should* work fine if you remove this file, since fallbacks for all these values are used, but it's not recommended.
+// See https://tarnishedengine.github.io/tengine-manual/utilities/config-parser/core-config for more details.
+// -DIY Labs
+
 te_core_config{
 
+    // Paths passed to internal filesinks, with respective filters.
     log_files{
 
         debug = "/logs/debug.log"
@@ -8,6 +15,21 @@ te_core_config{
         error = "/logs/error.log"
         fatal = "/logs/fatal.log"
         everything = "logs/main.log"
+
+    }
+
+    // File extension associations to make.
+    file_extensions{
+
+        config = "tcfg"
+        console_scripts = "tprg"
+
+    }
+
+    // Copy this node for any search paths you want to add.
+    recursive_search_path{
+
+        path = "/tengine-internal-assets"
 
     }
 
