@@ -38,8 +38,17 @@ void Logger::log(tengine::util::logger::LogLevel level, const std::string& sende
     auto& sink = m_logSinks[i];
     auto& filter = m_logFilters[i];
 
+    // If sink is null, log an error, and skip it.
+    // If a sink's filter is null, replace its filter with the default one
     if(!sink){  m_safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Null sink at position " + std::to_string(i) + " when attempting to log"); break; }
-    if(!filter){  m_safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Null filter at position " + std::to_string(i) + " when attempting to log"); break; }
+    if(!filter){
+
+      m_safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Null filter at position " + std::to_string(i) + " when attempting to log. Using default filter instead.");
+
+      filter = std::make_shared<LogFilter>();
+      filter = m_defaultFilter;
+
+    }
 
     switch(filter->filterMode){
 

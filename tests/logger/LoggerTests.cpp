@@ -153,4 +153,31 @@ TEST_F(LoggerTests, LevelFilter){
 
 }
 
+TEST_F(LoggerTests, HandlesNullSink){
 
+  auto& logger = tengine::util::logger::Logger::getInstance();
+  logger.addSink(nullptr);
+  logger.log(tengine::util::logger::LogLevel::LEVEL_DEBUG, "GTest", "Hello, Null!");
+
+}
+
+TEST_F(LoggerTests, HandlesNullFilter){
+
+  auto& logger = tengine::util::logger::Logger::getInstance();
+  auto sink_ReceiveTest = std::make_shared<DummySink>();
+  logger.addSink(sink_ReceiveTest, nullptr);
+  logger.log(tengine::util::logger::LogLevel::LEVEL_DEBUG, "GTest", "Hello, Null!");
+
+  ASSERT_EQ(sink_ReceiveTest->logs.size(), 1);
+  ASSERT_EQ(sink_ReceiveTest->logs[0].sender, "GTest");
+  ASSERT_EQ(sink_ReceiveTest->logs[0].message, "Hello, Null!");
+
+}
+
+TEST_F(LoggerTests, HandlesNullSinkAndFilter){
+
+  auto& logger = tengine::util::logger::Logger::getInstance();
+  logger.addSink(nullptr, nullptr);
+  logger.log(tengine::util::logger::LogLevel::LEVEL_DEBUG, "GTest", "Hello, Null!");
+
+}
