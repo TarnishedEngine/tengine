@@ -31,11 +31,16 @@ TEST_F(FileSinkTest, WritesLogToFile){
   std::ifstream file(testFileName);
   ASSERT_TRUE(file.is_open());          // verify file exists
 
-  std::string line;
-  std::getline(file, line);
+  std::string line, lastLine;
 
-  EXPECT_NE(line.find("INFO"), std::string::npos);
-  EXPECT_NE(line.find("GTest Test Sender"), std::string::npos);
-  EXPECT_NE(line.find("Hello, World!"), std::string::npos);
+  while(std::getline(file, line)){
+    if(!line.empty()){
+      lastLine = line;
+    }
+  }
+
+  EXPECT_NE(lastLine.find("INFO"), std::string::npos);
+  EXPECT_NE(lastLine.find("GTest Test Sender"), std::string::npos);
+  EXPECT_NE(lastLine.find("Hello, World!"), std::string::npos);
 
 }

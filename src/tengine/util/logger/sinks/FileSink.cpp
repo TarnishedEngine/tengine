@@ -22,7 +22,15 @@ FileSink::~FileSink() {
 }
 
 FileSink::FileSink(const std::string &path){
+
   m_logFile.open(path, std::ios::out | std::ios::app);
+
+  m_logFile << "\n"
+            << "\n"
+            << "\n"
+            << "FileSink at " << path << " opened at " << getTimestamp() << " \n"
+            << "\n";
+
 }
 
 void FileSink::receiveLog(const tengine::util::logger::LogLevel level, const std::string &sender, const std::string &message){
