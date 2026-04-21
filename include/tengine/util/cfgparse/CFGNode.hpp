@@ -48,7 +48,7 @@ struct CFGNode{
       return std::stoll(*val);
     }
     catch(const std::exception& e){
-      TENGINE_LOG_ERROR("CFGNode::getInt()", fmt::format("Caught exception {} when trying to parse key {}'s value {} as int64 ", key, *val, e.what()));
+      TENGINE_LOG_ERROR("CFGNode::getInt()", fmt::format("Caught exception {} when trying to parse key {}'s value {} as int64 ", e.what(), key, *val));
     }
 
     return fallback;
@@ -68,7 +68,7 @@ struct CFGNode{
       return std::stold(*val);
     }
     catch(const std::exception& e){
-      TENGINE_LOG_ERROR("CFGNode::getFloat()", fmt::format("Caught exception {} when trying to parse key {}'s value {} as long double ", key, *val, e.what()));
+      TENGINE_LOG_ERROR("CFGNode::getFloat()", fmt::format("Caught exception {} when trying to parse key {}'s value {} as long double ", e.what(), key, *val));
     }
 
     return fallback;
@@ -87,7 +87,7 @@ struct CFGNode{
     if(*val == "true" || *val == "1") return true;
     if(*val == "false" || *val == "0") return false;
 
-    TENGINE_LOG_WARN("CFGNode::getBoolean()", fmt::format("Attempted to convert key {}'s value {} to boolean, but {} does not match any aliases for booleans.", key, *val));
+    TENGINE_LOG_WARN("CFGNode::getBoolean()", fmt::format("Attempted to convert key {}'s value {} to boolean, but {} does not match any aliases for booleans.", key, *val, *val));
 
     return fallback;
 
