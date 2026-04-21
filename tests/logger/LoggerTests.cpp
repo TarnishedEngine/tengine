@@ -49,7 +49,8 @@ TEST_F(LoggerTests, LoggerDispatchesToSinks){
 
   auto& logger = tengine::util::logger::Logger::getInstance();
   auto dummySink = std::make_shared<DummySink>();
-  tengine::util::logger::LogFilter allowEverythingThrough;
+  auto allowEverythingThrough = std::make_shared<tengine::util::logger::LogFilter>();
+  allowEverythingThrough->filterMode = tengine::util::logger::FILTER_NO_FILTER;
 
   logger.addSink(dummySink, allowEverythingThrough);
 
@@ -83,7 +84,9 @@ TEST_F(LoggerTests, MultipleSinksReceiveLogs){
   auto& logger = tengine::util::logger::Logger::getInstance();
   auto dummySinkA = std::make_shared<DummySink>();
   auto dummySinkB = std::make_shared<DummySink>();
-  tengine::util::logger::LogFilter allowEverythingThrough;
+  auto allowEverythingThrough = std::make_shared<tengine::util::logger::LogFilter>();
+  allowEverythingThrough->filterMode = tengine::util::logger::FILTER_NO_FILTER;
+
 
   logger.addSink(dummySinkA, allowEverythingThrough);
   logger.addSink(dummySinkB, allowEverythingThrough);
@@ -108,13 +111,13 @@ TEST_F(LoggerTests, SenderFilter){
   auto sink_NoReceiveTest = std::make_shared<DummySink>();
   auto sink_ReceiveTest = std::make_shared<DummySink>();
 
-  tengine::util::logger::LogFilter receiveTest;
-  receiveTest.filterMode = tengine::util::logger::FILTER_ALLOW_SENDER;
-  receiveTest.senderList.push_back("GTest");
+  auto receiveTest = std::make_shared<tengine::util::logger::LogFilter>();
+  receiveTest->filterMode = tengine::util::logger::FILTER_ALLOW_SENDER;
+  receiveTest->senderList.push_back("GTest");
 
-  tengine::util::logger::LogFilter noReceiveTest;
-  noReceiveTest.filterMode = tengine::util::logger::FILTER_DISALLOW_SENDER;
-  noReceiveTest.senderList.push_back("GTest");
+  auto noReceiveTest = std::make_shared<tengine::util::logger::LogFilter>();
+  noReceiveTest->filterMode = tengine::util::logger::FILTER_DISALLOW_SENDER;
+  noReceiveTest->senderList.push_back("GTest");
 
   logger.addSink(sink_ReceiveTest, receiveTest);
   logger.addSink(sink_NoReceiveTest, noReceiveTest);
@@ -132,13 +135,13 @@ TEST_F(LoggerTests, LevelFilter){
   auto sink_NoReceiveTest = std::make_shared<DummySink>();
   auto sink_ReceiveTest = std::make_shared<DummySink>();
 
-  tengine::util::logger::LogFilter receiveTest;
-  receiveTest.filterMode = tengine::util::logger::FILTER_ALLOW_LOG_LEVEL;
-  receiveTest.levelList.push_back(tengine::util::logger::LogLevel::LEVEL_DEBUG);
+  auto receiveTest = std::make_shared<tengine::util::logger::LogFilter>();
+  receiveTest->filterMode = tengine::util::logger::FILTER_ALLOW_SENDER;
+  receiveTest->senderList.push_back("GTest");
 
-  tengine::util::logger::LogFilter noReceiveTest;
-  noReceiveTest.filterMode = tengine::util::logger::FILTER_DISALLOW_LOG_LEVEL;
-  noReceiveTest.levelList.push_back(tengine::util::logger::LogLevel::LEVEL_DEBUG);
+  auto noReceiveTest = std::make_shared<tengine::util::logger::LogFilter>();
+  noReceiveTest->filterMode = tengine::util::logger::FILTER_DISALLOW_SENDER;
+  noReceiveTest->senderList.push_back("GTest");
 
   logger.addSink(sink_ReceiveTest, receiveTest);
   logger.addSink(sink_NoReceiveTest, noReceiveTest);
