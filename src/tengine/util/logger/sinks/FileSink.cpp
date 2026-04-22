@@ -41,7 +41,7 @@ void FileSink::receiveLog(const tengine::util::logger::LogLevel level, const std
 
     m_logFile << "[ " << getTimestamp() << " ] "
               << "[ " << getLevelString(level) << " ] "
-              << "[ " << sender << " ] "
+              << "[ " << sender << " ]:  "
               << message << "\n";
     m_logFile.flush();
 
