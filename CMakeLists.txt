@@ -46,6 +46,7 @@ set(TENGINE_SOURCES
         src/tengine/util/logger/sinks/TerminalSink.cpp
         src/tengine/util/logger/sinks/FileSink.cpp
         src/tengine/util/cfgparse/Parser.cpp
+        src/tengine/util/cfgparse/Serializer.cpp
 )
 set(TENGINE_HEADERS
         include/tengine/util/logger/Filter.hpp
@@ -57,6 +58,7 @@ set(TENGINE_HEADERS
         include/tengine/util/logger/sinks/TerminalSink.hpp
         include/tengine/util/cfgparse/CFGNode.hpp
         include/tengine/util/cfgparse/Parser.hpp
+        include/tengine/util/cfgparse/Serializer.hpp
 )
 
 add_library(tengine ${TENGINE_SOURCES} ${TENGINE_HEADERS})

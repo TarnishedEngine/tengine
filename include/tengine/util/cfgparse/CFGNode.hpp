@@ -22,6 +22,7 @@ struct CFGNode{
   std::string nodeName;
   std::vector<CFGNode> children;
   std::map<std::string, std::string> values;
+  int nodes;
 
   /**
    * @param key Key whose value to search for in values
