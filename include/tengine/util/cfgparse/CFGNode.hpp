@@ -94,6 +94,18 @@ struct CFGNode{
 
   }
 
+  std::vector<CFGNode> getChildren(const std::string& key){
+
+    std::vector<CFGNode> nodes;
+
+    for(auto child : children){
+      if(child.nodeName == key) nodes.push_back(child);
+    }
+
+    return nodes;
+
+  }
+
 };
 
 }
