@@ -19,9 +19,6 @@ endif()
 
 
 option(BUILD_TENGINE_TESTS "Build all tengine unit tests" on)
-option(BUILD_TENGINE_TEST_APPLICATION "Build internal tengine test application" ON)
-
-
 
 set(TENGINE_ARCH "${CMAKE_SYSTEM_PROCESSOR}")
 set(TENGINE_BUILD_TYPE "${CMAKE_BUILD_TYPE}")
@@ -69,12 +66,6 @@ target_include_directories(tengine PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/generated>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/include>
 )
-
-
-if(BUILD_TENGINE_TEST_APPLICATION)
-    add_executable(tenginedemo demo/main.cpp)
-    target_link_libraries(tenginedemo PRIVATE tengine)
-endif()
 
 
 
