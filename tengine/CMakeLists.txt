@@ -56,6 +56,7 @@ set(TENGINE_HEADERS
         include/tengine/util/cfgparse/CFGNode.hpp
         include/tengine/util/cfgparse/Parser.hpp
         include/tengine/util/cfgparse/Serializer.hpp
+        include/tengine/console/ConVar.hpp
 )
 
 add_library(tengine ${TENGINE_SOURCES} ${TENGINE_HEADERS})
