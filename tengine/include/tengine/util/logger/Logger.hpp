@@ -36,7 +36,9 @@ public:
   Logger& operator=(Logger&&) = delete;
 
 private:
-  Logger() = default;
+  Logger(){
+    m_init();
+  }
   void m_safeInternalLog(tengine::util::logger::LogLevel level, const std::string& sender, const std::string& message);
   bool m_FilterBySender(std::string sender, std::shared_ptr<tengine::util::logger::LogFilter> filter);
   bool m_filterByLevel(tengine::util::logger::LogLevel level, std::shared_ptr<tengine::util::logger::LogFilter> filter);

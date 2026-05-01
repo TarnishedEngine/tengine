@@ -8,7 +8,7 @@ namespace tengine::util::logger{
 void Logger::m_init(){
 
   if(m_initComplete){
-      m_safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger::m_Init", "Init called when m_initComplete is true, this should not have happened");
+      m_safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger::m_Init", "Init called when m_initComplete is true, returning");
     return;
   }
 
@@ -24,11 +24,12 @@ void Logger::m_init(){
     std::abort();
   }
 
+  m_initComplete = true;
+
 }
 
 void Logger::log(tengine::util::logger::LogLevel level, const std::string& sender, const std::string& message) {
 
-  m_checkInit();
   m_safeInternalLog(level, sender, message);
 
   std::lock_guard<std::mutex> lock(m_mutex);
@@ -78,8 +79,6 @@ void Logger::log(tengine::util::logger::LogLevel level, const std::string& sende
 
 void Logger::addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink, const std::shared_ptr<tengine::util::logger::LogFilter> filter){
 
-  m_checkInit();
-
   if(!sink){
     m_safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Attempted to add null sink");
   }
@@ -92,8 +91,6 @@ void Logger::addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink
 
 void Logger::addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink){
 
-  m_checkInit();
-
   if(!sink){
     m_safeInternalLog(tengine::util::logger::LogLevel::LEVEL_ERROR, "Logger", "Attempted to add null sink");
   }
@@ -105,8 +102,6 @@ void Logger::addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink
 }
 
 void Logger::clearSinks(){
-
-  m_checkInit();
 
   std::lock_guard<std::mutex> lock(m_mutex);
   m_logSinks.clear();
