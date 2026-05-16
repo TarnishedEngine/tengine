@@ -66,7 +66,7 @@ set(TENGINE_HEADERS
         include/tengine/console/IConsole.hpp
 )
 
-add_library(tengine ${TENGINE_SOURCES} ${TENGINE_HEADERS})
+add_library(tengine STATIC ${TENGINE_SOURCES} ${TENGINE_HEADERS})
 target_link_libraries(tengine PUBLIC fmt::fmt)
 
 target_include_directories(tengine
@@ -77,7 +77,6 @@ target_include_directories(tengine
 )
 
 target_compile_features(tengine PUBLIC cxx_std_17)
-target_compile_definitions(tengine PRIVATE TENGINE_BUILD_DLL)
 
 
 # tengine runtime
