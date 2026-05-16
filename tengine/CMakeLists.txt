@@ -67,7 +67,6 @@ set(TENGINE_HEADERS
 )
 
 add_library(tengine ${TENGINE_SOURCES} ${TENGINE_HEADERS})
-set_target_properties(tengine PROPERTIES OUTPUT_NAME "libtengine")
 target_link_libraries(tengine PUBLIC fmt::fmt)
 
 target_include_directories(tengine
