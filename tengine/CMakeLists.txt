@@ -80,8 +80,16 @@ target_compile_features(tengine PUBLIC cxx_std_17)
 
 
 # tengine runtime
+set(TENGINE_RUNTIME_HEADERS
+    include/tengine/runtime/CmdOpts.hpp
+)
+
+set(TENGINE_RUNTIME_SOURCES
+    src/tengine/runtime/main.cpp
+)
+
 if(BUILD_TENGINE_RUNTIME)
-    add_executable(tengine_runtime src/tengine/runtime/main.cpp)
+    add_executable(tengine_runtime ${TENGINE_RUNTIME_HEADERS} ${TENGINE_RUNTIME_SOURCES})
     target_link_libraries(tengine_runtime PRIVATE tengine)
 
 endif()
