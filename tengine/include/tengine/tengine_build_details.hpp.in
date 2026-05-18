@@ -25,6 +25,9 @@ inline const std::string BUILD_TYPE = "@TENGINE_BUILD_TYPE@";
 inline const std::string SYSTEM_NAME = "@TENGINE_PLATFORM@";
 inline const std::string SYSTEM_ARCHITECTURE = "@TENGINE_ARCH@";
 
+inline const std::string TENGINE_LICENSE = R"(@TENGINE_LICENSE@)";
+inline const std::string THIRDPARTY_LICENSES = R"(@THIRDPARTY_LICENSES@)";
+
 /**
  * @brief Returns build details in a formatted string
 */
@@ -34,10 +37,15 @@ inline std::string getFormattedBuildDetails(){
     "{} version {} build type {}.\n"
     "{}\n"
     "Compiled at {} on {} - {}"
-    "\n",
+    "\n\n"
+    "{}\n"
+    "{}"
+    "\n\n",
     tengine::build_details::BUILD_ENGINE_NAME, tengine::build_details::BUILD_VERSION_STRING, tengine::build_details::BUILD_TYPE,
     tengine::build_details::BUILD_NOTES,
-    tengine::build_details::BUILD_TIMESTAMP, tengine::build_details::SYSTEM_NAME, tengine::build_details::SYSTEM_ARCHITECTURE
+    tengine::build_details::BUILD_TIMESTAMP, tengine::build_details::SYSTEM_NAME, tengine::build_details::SYSTEM_ARCHITECTURE,
+    tengine::build_details::TENGINE_LICENSE,
+    tengine::build_details::THIRDPARTY_LICENSES
     );
 
 }
