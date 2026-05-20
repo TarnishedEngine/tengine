@@ -8,7 +8,7 @@
 #include <string>
 #include <memory>
 
-#include <tengine/console/ConVar.hpp>
+#include <tengine/console/convar.hpp>
 
 namespace tengine::console{
 

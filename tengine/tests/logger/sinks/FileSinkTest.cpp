@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <fstream>
 #include <filesystem>
-#include <tengine/util/logger/sinks/FileSink.hpp>
+#include <tengine/util/logger/sinks/file_sink.hpp>
 #include <tengine/tengine_build_details.hpp>
 
 class FileSinkTest : public ::testing::Test{

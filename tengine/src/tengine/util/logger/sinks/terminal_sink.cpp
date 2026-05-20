@@ -4,7 +4,7 @@
  */
 
 #include <iostream>
-#include <tengine/util/logger/sinks/TerminalSink.hpp>
+#include <tengine/util/logger/sinks/terminal_sink.hpp>
 #include <termcolor/termcolor.hpp>
 
 namespace tengine::util::logger{

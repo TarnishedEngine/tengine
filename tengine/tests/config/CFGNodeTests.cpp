@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 #include <tengine/tengine_build_details.hpp>
-#include <tengine/util/cfgparse/CFGNode.hpp>
+#include <tengine/util/cfgparse/cfg_node.hpp>
 
 TEST(ConfigNodeTests, NodeParsesInt){
 

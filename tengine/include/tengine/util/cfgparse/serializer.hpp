@@ -8,7 +8,7 @@
 #include <string>
 #include <ostream>
 
-#include <tengine/util/cfgparse/CFGNode.hpp>
+#include <tengine/util/cfgparse/cfg_node.hpp>
 
 namespace tengine::util::cfg{
 

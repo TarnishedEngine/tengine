@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
-#include <tengine/util/logger/Logger.hpp>
-#include <tengine/util/logger/sinks/FileSink.hpp>
+#include <tengine/util/logger/logger.hpp>
+#include <tengine/util/logger/sinks/file_sink.hpp>
 
 namespace tengine::util::logger{
 

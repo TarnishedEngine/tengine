@@ -8,9 +8,9 @@
 #include <vector>
 #include <memory>
 #include <mutex>
-#include <tengine/util/logger/ILogSink.hpp>
-#include <tengine/util/logger/LogLevel.hpp>
-#include <tengine/util/logger/Filter.hpp>
+#include <tengine/util/logger/i_logsink.hpp>
+#include <tengine/util/logger/log_level.hpp>
+#include <tengine/util/logger/filter.hpp>
 
 namespace tengine::util::logger{
 

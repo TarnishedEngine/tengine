@@ -5,7 +5,7 @@
 #include <tengine/util/logger/sinks/TerminalSink.hpp>
 #include <tengine/util/logger/sinks/FileSink.hpp>
 #include "tengine/util/logger/LoggerMacros.hpp"
-#include <tengine/util/cfgparse/CFGNode.hpp>
+#include <tengine/util/cfgparse/cfgnode.hpp>
 
 auto terminalSink = std::make_shared<tengine::util::logger::TerminalSink>();
 auto fileSink = std::make_shared<tengine::util::logger::FileSink>("demo-log.log");

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <tengine/util/cfgparse/Parser.hpp>
-#include <tengine/util/cfgparse/CFGNode.hpp>
+#include <tengine/util/cfgparse/parser.hpp>
+#include <tengine/util/cfgparse/cfg_node.hpp>
 #include <tengine/tengine_build_details.hpp>
 
 TEST(CFGParserTests, SingleNodeParsing){

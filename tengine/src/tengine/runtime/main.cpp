@@ -2,9 +2,9 @@
 #include <tengine/tengine_build_details.hpp>
 #include <cxxopts/cxxopts.hpp>
 
-#include <tengine/runtime/CmdOpts.hpp>
+#include <tengine/runtime/cmd_opts.hpp>
 
-#include "tengine/util/logger/sinks/TerminalSink.hpp"
+#include "tengine/util/logger/sinks/terminal_sink.hpp"
 
 cxxopts::Options cliOptions("tengine_runtime", "TarnishedEngine runtime");
 

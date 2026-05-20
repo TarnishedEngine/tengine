@@ -7,7 +7,7 @@
 
 #include <vector>
 #include <string>
-#include <tengine/console/IConsole.hpp>
+#include <tengine/console/i_console.hpp>
 
 namespace tengine::console{
 

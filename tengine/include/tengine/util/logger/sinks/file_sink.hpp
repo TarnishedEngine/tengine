@@ -8,7 +8,7 @@
 #include <fstream>
 #include <mutex>
 #include <string>
-#include <tengine/util/logger/ILogSink.hpp>
+#include <tengine/util/logger/i_logsink.hpp>
 
 namespace tengine::util::logger{
 

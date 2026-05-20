@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 #include <string>
 #include <vector>
-#include <tengine/util/logger/sinks/FileSink.hpp>
-#include <tengine/util/logger/Filter.hpp>
-#include "tengine/util/logger/Logger.hpp"
+#include <tengine/util/logger/sinks/file_sink.hpp>
+#include <tengine/util/logger/filter.hpp>
+#include "tengine/util/logger/logger.hpp"
 #include <tengine/tengine_build_details.hpp>
 
 struct CapturedLog{

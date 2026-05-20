@@ -51,28 +51,28 @@ FetchContent_MakeAvailable(fmt)
 
 # libtengine
 set(TENGINE_SOURCES
-        src/tengine/util/logger/Logger.cpp
-        src/tengine/util/logger/sinks/TerminalSink.cpp
-        src/tengine/util/logger/sinks/FileSink.cpp
-        src/tengine/util/cfgparse/Parser.cpp
-        src/tengine/util/cfgparse/Serializer.cpp
-        src/tengine/console/Console.cpp
+        src/tengine/util/logger/logger.cpp
+        src/tengine/util/logger/sinks/terminal_sink.cpp
+        src/tengine/util/logger/sinks/file_sink.cpp
+        src/tengine/util/cfgparse/parser.cpp
+        src/tengine/util/cfgparse/serializer.cpp
+        src/tengine/console/console.cpp
 )
 set(TENGINE_HEADERS
-        include/tengine/util/logger/Filter.hpp
-        include/tengine/util/logger/ILogSink.hpp
-        include/tengine/util/logger/Logger.hpp
-        include/tengine/util/logger/LoggerMacros.hpp
-        include/tengine/util/logger/LogLevel.hpp
-        include/tengine/util/logger/sinks/FileSink.hpp
-        include/tengine/util/logger/sinks/TerminalSink.hpp
-        include/tengine/util/cfgparse/CFGNode.hpp
-        include/tengine/util/cfgparse/Parser.hpp
-        include/tengine/util/cfgparse/Serializer.hpp
-        include/tengine/console/ConVar.hpp
-        include/tengine/console/IConOutput.hpp
-        include/tengine/console/Console.hpp
-        include/tengine/console/IConsole.hpp
+        include/tengine/util/logger/filter.hpp
+        include/tengine/util/logger/i_logsink.hpp
+        include/tengine/util/logger/logger.hpp
+        include/tengine/util/logger/logger_macros.hpp
+        include/tengine/util/logger/log_level.hpp
+        include/tengine/util/logger/sinks/file_sink.hpp
+        include/tengine/util/logger/sinks/terminal_sink.hpp
+        include/tengine/util/cfgparse/cfg_node.hpp
+        include/tengine/util/cfgparse/parser.hpp
+        include/tengine/util/cfgparse/serializer.hpp
+        include/tengine/console/convar.hpp
+        include/tengine/console/i_conoutput.hpp
+        include/tengine/console/console.hpp
+        include/tengine/console/i_console.hpp
 )
 
 add_library(tengine STATIC ${TENGINE_SOURCES} ${TENGINE_HEADERS})
@@ -90,7 +90,7 @@ target_compile_features(tengine PUBLIC cxx_std_17)
 
 # tengine runtime
 set(TENGINE_RUNTIME_HEADERS
-    include/tengine/runtime/CmdOpts.hpp
+    include/tengine/runtime/cmd_opts.hpp
 )
 
 set(TENGINE_RUNTIME_SOURCES

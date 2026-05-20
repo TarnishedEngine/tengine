@@ -8,7 +8,7 @@
 
 #include <string>
 #include <vector>
-#include <tengine/util/logger/LogLevel.hpp>
+#include <tengine/util/logger/log_level.hpp>
 
 namespace tengine::util::logger{
 

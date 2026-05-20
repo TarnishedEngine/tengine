@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 #include <iostream>
 
-#include <tengine/util/cfgparse/Serializer.hpp>
-#include <tengine/util/cfgparse/Parser.hpp>
-#include <tengine/util/cfgparse/CFGNode.hpp>
+#include <tengine/util/cfgparse/serializer.hpp>
+#include <tengine/util/cfgparse/parser.hpp>
+#include <tengine/util/cfgparse/cfg_node.hpp>
 
 namespace{
 

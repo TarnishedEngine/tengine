@@ -12,8 +12,8 @@
 #include <optional>
 #include <fmt/format.h>
 
-#include <tengine/util/logger/Logger.hpp>
-#include <tengine/util/logger/LoggerMacros.hpp>
+#include <tengine/util/logger/logger.hpp>
+#include <tengine/util/logger/logger_macros.hpp>
 
 namespace tengine::util::cfg{
 

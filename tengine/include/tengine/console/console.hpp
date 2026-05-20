@@ -10,10 +10,10 @@
 #include <memory>
 #include <string>
 
-#include <tengine/console/IConsole.hpp>
-#include <tengine/console/IConCommand.hpp>
-#include <tengine/console/IConOutput.hpp>
-#include <tengine/console/ConVar.hpp>
+#include <tengine/console/i_console.hpp>
+#include <tengine/console/i_concommand.hpp>
+#include <tengine/console/i_conoutput.hpp>
+#include <tengine/console/convar.hpp>
 
 namespace tengine::console{
 

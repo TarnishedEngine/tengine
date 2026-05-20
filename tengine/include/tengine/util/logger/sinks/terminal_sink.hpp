@@ -6,8 +6,8 @@
 #pragma once
 
 #include <functional>
-#include <tengine/util/logger/ILogSink.hpp>
-#include <tengine/util/logger/LogLevel.hpp>
+#include <tengine/util/logger/i_logsink.hpp>
+#include <tengine/util/logger/log_level.hpp>
 #include <termcolor/termcolor.hpp>
 
 namespace tengine::util::logger{

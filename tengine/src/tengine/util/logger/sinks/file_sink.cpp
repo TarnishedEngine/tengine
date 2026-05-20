@@ -6,7 +6,7 @@
 #include <chrono>
 #include <iomanip>
 #include <sstream>
-#include <tengine/util/logger/sinks/FileSink.hpp>
+#include <tengine/util/logger/sinks/file_sink.hpp>
 
 namespace tengine::util::logger{
 
