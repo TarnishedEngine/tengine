@@ -2,7 +2,6 @@
 #include <tengine/util/cfgparse/parser.hpp>
 #include <tengine/util/cfgparse/cfg_node.hpp>
 #include <tengine/tengine_build_details.hpp>
-#include <tengine/util/logger/sinks/terminal_sink.hpp>
 
 TEST(CFGParserTests, SingleNodeParsing){
 
@@ -92,11 +91,6 @@ TEST(CFGParserTests, MultipleTopLevelNodes){
 TEST(CFGParserTests, RecursiveDirectoryParsing){
 
   const std::filesystem::path dir = "testdata/cfg";
-  std::cout << "cwd = " << std::filesystem::current_path() << '\n';
-  std::cout << "dir = " << std::filesystem::absolute(dir) << '\n';
-
-  auto sink = std::make_shared<tengine::util::logger::TerminalSink>();
-  TENGINE_GET_LOGGER.addSink(sink);
 
   std::vector<tengine::util::cfg::CFGNode> nodes;
 
