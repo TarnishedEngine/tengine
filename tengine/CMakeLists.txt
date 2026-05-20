@@ -118,13 +118,15 @@ if(BUILD_TENGINE_TESTS)
         add_executable(${test_name} ${test_source})
         target_link_libraries(${test_name} PRIVATE tengine gtest_main)
 
+        add_custom_command(TARGET ${test_name} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/tests/testdata $<TARGET_FILE_DIR:${test_name}>/testdata)
+
         include(GoogleTest)
-        gtest_discover_tests(${test_name})
+        gtest_discover_tests(${test_name} WORKING_DIRECTORY $<TARGET_FILE_DIR:${test_name}>)
         message(STATUS "Registered GTest test ${test_name}")
     endforeach()
+
 endif()
 
 
 # Runtime assets
-file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/tests/testdata" DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/tengine-runtime-assets" DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")

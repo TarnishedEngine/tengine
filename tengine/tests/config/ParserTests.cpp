@@ -91,12 +91,15 @@ TEST(CFGParserTests, MultipleTopLevelNodes){
 
 TEST(CFGParserTests, RecursiveDirectoryParsing){
 
+  const std::filesystem::path dir = "testdata/cfg";
+  std::cout << "cwd = " << std::filesystem::current_path() << '\n';
+  std::cout << "dir = " << std::filesystem::absolute(dir) << '\n';
+
   auto sink = std::make_shared<tengine::util::logger::TerminalSink>();
   TENGINE_GET_LOGGER.addSink(sink);
 
   std::vector<tengine::util::cfg::CFGNode> nodes;
 
-  const std::filesystem::path dir = "/testdata/cfg";
   bool ret = tengine::util::cfg::CFGParser::parseRecursive(dir, nodes, ".tcfg");
 
   ASSERT_EQ(ret, true);
