@@ -2,6 +2,7 @@
 #include <tengine/util/cfgparse/parser.hpp>
 #include <tengine/util/cfgparse/cfg_node.hpp>
 #include <tengine/tengine_build_details.hpp>
+#include <tengine/util/logger/sinks/terminal_sink.hpp>
 
 TEST(CFGParserTests, SingleNodeParsing){
 
@@ -85,5 +86,20 @@ TEST(CFGParserTests, MultipleTopLevelNodes){
   EXPECT_EQ(nodes[1].nodeName, "NodeB");
   EXPECT_EQ(nodes[0].getInteger("id"), 1);
   EXPECT_EQ(nodes[1].getInteger("id"), 2);
+
+}
+
+TEST(CFGParserTests, RecursiveDirectoryParsing){
+
+  auto sink = std::make_shared<tengine::util::logger::TerminalSink>();
+  TENGINE_GET_LOGGER.addSink(sink);
+
+  std::vector<tengine::util::cfg::CFGNode> nodes;
+
+  const std::filesystem::path dir = std::filesystem::current_path() / "bin/testdata/cfg";
+  bool ret = tengine::util::cfg::CFGParser::parseRecursive(dir, nodes, ".tcfg");
+
+  ASSERT_EQ(ret, true);
+  ASSERT_EQ(nodes.size(), 3);
 
 }
