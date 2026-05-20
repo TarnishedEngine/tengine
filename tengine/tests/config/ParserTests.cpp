@@ -96,7 +96,7 @@ TEST(CFGParserTests, RecursiveDirectoryParsing){
 
   std::vector<tengine::util::cfg::CFGNode> nodes;
 
-  const std::filesystem::path dir = std::filesystem::current_path() / "bin/testdata/cfg";
+  const std::filesystem::path dir = "/testdata/cfg";
   bool ret = tengine::util::cfg::CFGParser::parseRecursive(dir, nodes, ".tcfg");
 
   ASSERT_EQ(ret, true);
