@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-namespace tengine::util::cfg{
+namespace tengine::util{
 
 std::string CFGSerializer::serialize(const CFGNode &node){
 

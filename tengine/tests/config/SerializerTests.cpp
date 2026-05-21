@@ -7,7 +7,7 @@
 
 namespace{
 
-bool diffNodes(const tengine::util::cfg::CFGNode& a, const tengine::util::cfg::CFGNode& b){
+bool diffNodes(const tengine::util::CFGNode& a, const tengine::util::CFGNode& b){
 
   if(a.nodeName != b.nodeName) return false;
   if(a.values != b.values) return false;
@@ -22,15 +22,15 @@ bool diffNodes(const tengine::util::cfg::CFGNode& a, const tengine::util::cfg::C
 }
 
 TEST(CFGSerializerTests, Loopback){
-  tengine::util::cfg::CFGNode root;
+  tengine::util::CFGNode root;
 
-  tengine::util::cfg::CFGNode child0;
+  tengine::util::CFGNode child0;
   child0.nodeName = "child0";
   child0.values["stringfield"] = "Now darling, where do we go from here?";
   child0.values["intfield"] = "21";
   child0.values["boolfield"] = "false";
 
-  tengine::util::cfg::CFGNode child1;
+  tengine::util::CFGNode child1;
   child1.nodeName = "child1";
   child1.values["stringfield"] = "Hey honey, where do we go from here?";
   child1.values["intfield"] = "42";
@@ -39,12 +39,12 @@ TEST(CFGSerializerTests, Loopback){
   child0.children.push_back(child1);
   root.children.push_back(child0);
 
-  std::string serialized = tengine::util::cfg::CFGSerializer::serialize(root);
+  std::string serialized = tengine::util::CFGSerializer::serialize(root);
   std::cout << "\nSerialized output:\n"
             << serialized
             << "\n";
 
-  std::vector<tengine::util::cfg::CFGNode> parsed = tengine::util::cfg::CFGParser::parse(serialized);
+  std::vector<tengine::util::CFGNode> parsed = tengine::util::CFGParser::parse(serialized);
 
   ASSERT_EQ(parsed.size(), root.children.size());
 

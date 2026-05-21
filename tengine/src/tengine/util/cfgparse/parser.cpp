@@ -6,7 +6,7 @@
 #include <tengine/util/logger/logger_macros.hpp>
 #include <fmt/format.h>
 
-namespace tengine::util::cfg{
+namespace tengine::util{
 
 std::vector<CFGNode> CFGParser::parse(const std::string &input){
 

@@ -16,7 +16,7 @@ TEST(CFGParserTests, SingleNodeParsing){
 
   )";
 
-  auto nodes = tengine::util::cfg::CFGParser::parse(config);
+  auto nodes = tengine::util::CFGParser::parse(config);
   ASSERT_EQ(nodes.size(), 1);
   EXPECT_EQ(nodes[0].nodeName, "SimpleNode");
   EXPECT_EQ(nodes[0].getStringValue("key"), "value");
@@ -38,7 +38,7 @@ TEST(CFGParserTests, NestedNodeParsing){
         }
     )";
 
-  auto nodes = tengine::util::cfg::CFGParser::parse(config);
+  auto nodes = tengine::util::CFGParser::parse(config);
 
   ASSERT_EQ(nodes.size(), 1);
   ASSERT_EQ(nodes[0].children.size(), 1);
@@ -62,7 +62,7 @@ TEST(CFGParserTests, QuotesAndComments){
         }
     )";
 
-  auto nodes = tengine::util::cfg::CFGParser::parse(config);
+  auto nodes = tengine::util::CFGParser::parse(config);
 
   ASSERT_EQ(nodes.size(), 1);
   EXPECT_EQ(nodes[0].getStringValue("spaced_key"), "Hello World");
@@ -78,7 +78,7 @@ TEST(CFGParserTests, MultipleTopLevelNodes){
         NodeB { id = 2 }
     )";
 
-  auto nodes = tengine::util::cfg::CFGParser::parse(config);
+  auto nodes = tengine::util::CFGParser::parse(config);
 
   ASSERT_EQ(nodes.size(), 2);
   EXPECT_EQ(nodes[0].nodeName, "NodeA");
@@ -92,9 +92,9 @@ TEST(CFGParserTests, RecursiveDirectoryParsing){
 
   const std::filesystem::path dir = "testdata/cfg";
 
-  std::vector<tengine::util::cfg::CFGNode> nodes;
+  std::vector<tengine::util::CFGNode> nodes;
 
-  bool ret = tengine::util::cfg::CFGParser::parseRecursive(dir, nodes, ".tcfg");
+  bool ret = tengine::util::CFGParser::parseRecursive(dir, nodes, ".tcfg");
 
   ASSERT_EQ(ret, true);
   ASSERT_EQ(nodes.size(), 3);

@@ -15,7 +15,7 @@
 #include <tengine/util/logger/logger.hpp>
 #include <tengine/util/logger/logger_macros.hpp>
 
-namespace tengine::util::cfg{
+namespace tengine::util{
 
 struct CFGNode{
 

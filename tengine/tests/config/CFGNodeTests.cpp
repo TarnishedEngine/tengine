@@ -7,7 +7,7 @@ TEST(ConfigNodeTests, NodeParsesInt){
 
   tengine::build_details::printBuildDetails();
 
-  tengine::util::cfg::CFGNode node;
+  tengine::util::CFGNode node;
   node.values["IntKey"] = "42";
   node.values["ErrorKey"] = "ErrorString";
 
@@ -20,7 +20,7 @@ TEST(ConfigNodeTests, NodeParsesFloat){
 
   tengine::build_details::printBuildDetails();
 
-  tengine::util::cfg::CFGNode node;
+  tengine::util::CFGNode node;
   node.values["FloatKey"] = "3.14";
   node.values["ErrorKey"] = "ErrorString";
 
@@ -33,7 +33,7 @@ TEST(ConfigNodeTests, NodeParsesBool){
 
   tengine::build_details::printBuildDetails();
 
-  tengine::util::cfg::CFGNode node;
+  tengine::util::CFGNode node;
   node.values["BoolKeyWord"] = "true";
   node.values["BoolKeyNumber"] = "1";
   node.values["ErrorKey"] = "ErrorString";
@@ -48,7 +48,7 @@ TEST(ConfigNodeTests, NodeParsesString){
 
   tengine::build_details::printBuildDetails();
 
-  tengine::util::cfg::CFGNode node;
+  tengine::util::CFGNode node;
   node.values["StringKey"] = "Hello, Tarnished!";
 
   ASSERT_EQ(node.getStringValue("StringKey"), "Hello, Tarnished!");
@@ -59,7 +59,7 @@ TEST(ConfigNodeTests, NodeReturnsNullOpt){
 
   tengine::build_details::printBuildDetails();
 
-  tengine::util::cfg::CFGNode node;
+  tengine::util::CFGNode node;
 
   ASSERT_EQ(node.getStringValue("StringKey"), std::nullopt);
 

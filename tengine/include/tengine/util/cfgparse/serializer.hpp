@@ -10,7 +10,7 @@
 
 #include <tengine/util/cfgparse/cfg_node.hpp>
 
-namespace tengine::util::cfg{
+namespace tengine::util{
 
 class CFGSerializer{
 
