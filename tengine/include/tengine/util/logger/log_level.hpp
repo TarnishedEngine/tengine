@@ -5,7 +5,7 @@
 
 #pragma once
 
-namespace tengine::util::logger{
+namespace tengine::util{
 
 enum class LogLevel{
 

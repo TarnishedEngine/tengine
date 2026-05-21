@@ -8,7 +8,7 @@
 #include <sstream>
 #include <tengine/util/logger/sinks/file_sink.hpp>
 
-namespace tengine::util::logger{
+namespace tengine::util{
 
 FileSink::~FileSink() {
 
@@ -33,7 +33,7 @@ FileSink::FileSink(const std::string &path){
 
 }
 
-void FileSink::receiveLog(const tengine::util::logger::LogLevel level, const std::string &sender, const std::string &message){
+void FileSink::receiveLog(const tengine::util::LogLevel level, const std::string &sender, const std::string &message){
 
   std::lock_guard<std::mutex> lock(m_fileMutex);
 
@@ -49,15 +49,15 @@ void FileSink::receiveLog(const tengine::util::logger::LogLevel level, const std
 
 }
 
-const char* FileSink::getLevelString(tengine::util::logger::LogLevel level) {
+const char* FileSink::getLevelString(tengine::util::LogLevel level) {
 
   switch(level){
 
-    case tengine::util::logger::LogLevel::LEVEL_DEBUG: return "DEBUG";
-    case tengine::util::logger::LogLevel::LEVEL_INFO: return "INFO";
-    case tengine::util::logger::LogLevel::LEVEL_WARN: return "WARN";
-    case tengine::util::logger::LogLevel::LEVEL_ERROR: return "ERROR";
-    case tengine::util::logger::LogLevel::LEVEL_FATAL: return "FATAL";
+    case tengine::util::LogLevel::LEVEL_DEBUG: return "DEBUG";
+    case tengine::util::LogLevel::LEVEL_INFO: return "INFO";
+    case tengine::util::LogLevel::LEVEL_WARN: return "WARN";
+    case tengine::util::LogLevel::LEVEL_ERROR: return "ERROR";
+    case tengine::util::LogLevel::LEVEL_FATAL: return "FATAL";
     default: return "Unknown log level";
 
   }

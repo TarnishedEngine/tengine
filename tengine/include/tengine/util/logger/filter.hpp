@@ -10,7 +10,7 @@
 #include <vector>
 #include <tengine/util/logger/log_level.hpp>
 
-namespace tengine::util::logger{
+namespace tengine::util{
 
 enum FilterMode{
 
@@ -24,9 +24,9 @@ enum FilterMode{
 
 struct LogFilter{
 
-  tengine::util::logger::FilterMode filterMode = FILTER_NO_FILTER;
+  tengine::util::FilterMode filterMode = FILTER_NO_FILTER;
   std::vector<std::string> senderList;
-  std::vector<tengine::util::logger::LogLevel> levelList;
+  std::vector<tengine::util::LogLevel> levelList;
 
 };
 

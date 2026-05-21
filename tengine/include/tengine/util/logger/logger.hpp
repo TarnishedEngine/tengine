@@ -12,7 +12,7 @@
 #include <tengine/util/logger/log_level.hpp>
 #include <tengine/util/logger/filter.hpp>
 
-namespace tengine::util::logger{
+namespace tengine::util{
 
 class Logger{
 
@@ -24,9 +24,9 @@ public:
     return instance;
   }
 
-  void log(tengine::util::logger::LogLevel level, const std::string& sender, const std::string& message);
-  void addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink, const std::shared_ptr<tengine::util::logger::LogFilter> filter);
-  void addSink(const std::shared_ptr<tengine::util::logger::ILogSink> sink);
+  void log(tengine::util::LogLevel level, const std::string& sender, const std::string& message);
+  void addSink(const std::shared_ptr<tengine::util::ILogSink> sink, const std::shared_ptr<tengine::util::LogFilter> filter);
+  void addSink(const std::shared_ptr<tengine::util::ILogSink> sink);
   void clearSinks();
 
   // Refuse all constructors, force Logger::getInstance()
@@ -39,20 +39,20 @@ private:
   Logger(){
     m_init();
   }
-  void m_safeInternalLog(tengine::util::logger::LogLevel level, const std::string& sender, const std::string& message);
-  bool m_FilterBySender(std::string sender, std::shared_ptr<tengine::util::logger::LogFilter> filter);
-  bool m_filterByLevel(tengine::util::logger::LogLevel level, std::shared_ptr<tengine::util::logger::LogFilter> filter);
+  void m_safeInternalLog(tengine::util::LogLevel level, const std::string& sender, const std::string& message);
+  bool m_FilterBySender(std::string sender, std::shared_ptr<tengine::util::LogFilter> filter);
+  bool m_filterByLevel(tengine::util::LogLevel level, std::shared_ptr<tengine::util::LogFilter> filter);
   void m_init();
 
   void m_checkInit();
   bool m_initComplete = false;
 
-  std::shared_ptr<tengine::util::logger::ILogSink> m_internalSink;
-  std::vector<std::shared_ptr<tengine::util::logger::ILogSink>> m_logSinks;
-  std::vector<std::shared_ptr<tengine::util::logger::LogFilter>> m_logFilters;
+  std::shared_ptr<tengine::util::ILogSink> m_internalSink;
+  std::vector<std::shared_ptr<tengine::util::ILogSink>> m_logSinks;
+  std::vector<std::shared_ptr<tengine::util::LogFilter>> m_logFilters;
   std::mutex m_mutex;
 
-  const std::shared_ptr<tengine::util::logger::LogFilter> m_defaultFilter = std::make_shared<tengine::util::logger::LogFilter>();
+  const std::shared_ptr<tengine::util::LogFilter> m_defaultFilter = std::make_shared<tengine::util::LogFilter>();
 
 };
 

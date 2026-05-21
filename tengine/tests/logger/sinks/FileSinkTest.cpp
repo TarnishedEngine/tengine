@@ -24,8 +24,8 @@ TEST_F(FileSinkTest, WritesLogToFile){
   tengine::build_details::printBuildDetails();
 
   {
-    tengine::util::logger::FileSink sink(testFileName);
-    sink.receiveLog(tengine::util::logger::LogLevel::LEVEL_INFO, "GTest Test Sender", "Hello, World!");
+    tengine::util::FileSink sink(testFileName);
+    sink.receiveLog(tengine::util::LogLevel::LEVEL_INFO, "GTest Test Sender", "Hello, World!");
   }
 
   std::ifstream file(testFileName);

@@ -10,19 +10,19 @@
 #include <string>
 #include <tengine/util/logger/i_logsink.hpp>
 
-namespace tengine::util::logger{
+namespace tengine::util{
 
 class FileSink : public ILogSink{
 
 public:
   explicit FileSink(const std::string& path);
   ~FileSink() override;
-  void receiveLog(const tengine::util::logger::LogLevel level, const std::string &sender, const std::string &message) override;
+  void receiveLog(const tengine::util::LogLevel level, const std::string &sender, const std::string &message) override;
 
 private:
   std::ofstream m_logFile;
   std::mutex m_fileMutex;
-  const char* getLevelString(tengine::util::logger::LogLevel level);
+  const char* getLevelString(tengine::util::LogLevel level);
   std::string getTimestamp();
 
 };
