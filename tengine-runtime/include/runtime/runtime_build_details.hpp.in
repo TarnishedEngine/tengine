@@ -1,0 +1,62 @@
+/**
+ * @file runtime_build_details.hpp
+ * @brief Template header that contains build details. Filled in by CMake when building.
+ * @author DIY Labs
+ */
+
+#pragma once
+
+#include <string>
+#include <iostream>
+#include <fmt/format.h>
+
+namespace runtime{
+
+inline constexpr int BUILD_VERSION_MAJOR = @PROJECT_VERSION_MAJOR@;
+inline constexpr int BUILD_VERSION_MINOR = @PROJECT_VERSION_MINOR@;
+inline constexpr int BUILD_VERSION_PATCH = @PROJECT_VERSION_PATCH@;
+
+inline const std::string BUILD_VERSION_STRING = "@PROJECT_VERSION@";
+inline const std::string BUILD_ENGINE_NAME = "@PROJECT_NAME@";
+
+inline const std::string BUILD_TIMESTAMP = "@RUNTIME_BUILD_TIME@";
+inline const std::string BUILD_NOTES = "@RUNTIME_BUILD_NOTES@";
+inline const std::string BUILD_TYPE = "@RUNTIME_BUILD_TYPE@";
+inline const std::string SYSTEM_NAME = "@RUNTIME_PLATFORM@";
+inline const std::string SYSTEM_ARCHITECTURE = "@RUNTIME_ARCH@";
+
+inline const std::string RUNTIME_LICENSE = R"(@RUNTIME_LICENSE@)";
+inline const std::string THIRDPARTY_LICENSES = R"(@THIRDPARTY_LICENSES@)";
+
+/**
+ * @brief Returns build details in a formatted string
+*/
+inline std::string getFormattedBuildDetails(){
+
+    return fmt::format(
+    "{} version {} build type {}.\n"
+    "{}\n"
+    "Compiled at {} on {} - {}"
+    "\n\n"
+    "{}\n"
+    "{}"
+    "\n\n",
+    runtime::BUILD_ENGINE_NAME, runtime::BUILD_VERSION_STRING, runtime::BUILD_TYPE,
+    runtime::BUILD_NOTES,
+    runtime::BUILD_TIMESTAMP, runtime::SYSTEM_NAME, runtime::SYSTEM_ARCHITECTURE,
+    runtime::RUNTIME_LICENSE,
+    runtime::THIRDPARTY_LICENSES
+    );
+
+}
+
+/**
+ * @brief Prints build details to standard output.
+ */
+inline void printBuildDetails(){
+
+    std::cout << getFormattedBuildDetails();
+
+}
+
+}

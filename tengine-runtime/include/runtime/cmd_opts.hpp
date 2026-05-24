@@ -10,7 +10,7 @@
 
 #pragma once
 
-namespace tengine::runtime::cmdopts{
+namespace runtime{
 
 struct CMDOption{
 

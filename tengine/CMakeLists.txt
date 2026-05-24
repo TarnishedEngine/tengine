@@ -88,22 +88,6 @@ target_include_directories(tengine
 target_compile_features(tengine PUBLIC cxx_std_17)
 
 
-# tengine runtime
-set(TENGINE_RUNTIME_HEADERS
-    include/tengine/runtime/cmd_opts.hpp
-)
-
-set(TENGINE_RUNTIME_SOURCES
-    src/tengine/runtime/main.cpp
-)
-
-if(BUILD_TENGINE_RUNTIME)
-    add_executable(tengine_runtime ${TENGINE_RUNTIME_HEADERS} ${TENGINE_RUNTIME_SOURCES})
-    target_link_libraries(tengine_runtime PRIVATE tengine)
-
-endif()
-
-
 # tengine tests
 if(BUILD_TENGINE_TESTS)
     FetchContent_Declare(googletest URL https://github.com/google/googletest/archive/refs/heads/main.zip)
@@ -126,7 +110,3 @@ if(BUILD_TENGINE_TESTS)
     endforeach()
 
 endif()
-
-
-# Runtime assets
-file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/tengine-runtime-assets" DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")

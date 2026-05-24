@@ -4,3 +4,4 @@ project(TarnishedEngine VERSION 0.0.0 LANGUAGES CXX)
 enable_testing()
 
 add_subdirectory(tengine)
+add_subdirectory(tengine-runtime)
