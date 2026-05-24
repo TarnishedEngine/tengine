@@ -19,19 +19,6 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v4
 
-    - name: Inspect runtime directory
-      run: |
-        echo "PWD=$(pwd)"
-        echo "Workspace=${{ github.workspace }}"
-        
-        ls -la
-        ls -la tengine-runtime || true
-        
-        find tengine-runtime -maxdepth 2 -print
-        
-        stat tengine-runtime/CMakeLists.txt || true
-        cat tengine-runtime/CMakeLists.txt || true
-
     - name: Configure CMake
       run: >
         cmake -B ${{ github.workspace }}/build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DTENGINE_BUILD_NOTES:STRING="Compiled with machine love"
