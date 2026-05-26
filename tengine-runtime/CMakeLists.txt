@@ -41,7 +41,8 @@ FetchContent_MakeAvailable(fmt)
 # Runtime files
 set(RUNTIME_HEADERS
         include/runtime/cmd_opts.hpp
-        include/runtime/init.hpp
+        include/runtime/core/init.hpp
+        include/runtime/core/RuntimeGlobals.hpp
 )
 
 set(RUNTIME_SOURCES

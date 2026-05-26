@@ -73,6 +73,7 @@ set(TENGINE_HEADERS
         include/tengine/console/i_conoutput.hpp
         include/tengine/console/console.hpp
         include/tengine/console/i_console.hpp
+        include/tengine/util/filesystem/recur_file_by_ext.hpp
 )
 
 add_library(tengine STATIC ${TENGINE_SOURCES} ${TENGINE_HEADERS})

@@ -10,7 +10,7 @@
 
 #pragma once
 
-namespace runtime{
+namespace truntime{
 
 struct CMDOption{
 

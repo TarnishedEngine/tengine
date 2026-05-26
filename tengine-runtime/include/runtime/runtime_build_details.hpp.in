@@ -10,7 +10,7 @@
 #include <iostream>
 #include <fmt/format.h>
 
-namespace runtime{
+namespace truntime{
 
 inline constexpr int BUILD_VERSION_MAJOR = @PROJECT_VERSION_MAJOR@;
 inline constexpr int BUILD_VERSION_MINOR = @PROJECT_VERSION_MINOR@;
@@ -41,11 +41,11 @@ inline std::string getFormattedBuildDetails(){
     "{}\n"
     "{}"
     "\n\n",
-    runtime::BUILD_ENGINE_NAME, runtime::BUILD_VERSION_STRING, runtime::BUILD_TYPE,
-    runtime::BUILD_NOTES,
-    runtime::BUILD_TIMESTAMP, runtime::SYSTEM_NAME, runtime::SYSTEM_ARCHITECTURE,
-    runtime::RUNTIME_LICENSE,
-    runtime::THIRDPARTY_LICENSES
+    truntime::BUILD_ENGINE_NAME, truntime::BUILD_VERSION_STRING, truntime::BUILD_TYPE,
+    truntime::BUILD_NOTES,
+    truntime::BUILD_TIMESTAMP, truntime::SYSTEM_NAME, truntime::SYSTEM_ARCHITECTURE,
+    truntime::RUNTIME_LICENSE,
+    truntime::THIRDPARTY_LICENSES
     );
 
 }

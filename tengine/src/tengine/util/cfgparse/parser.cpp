@@ -2,9 +2,11 @@
 #include <limits>
 #include <fstream>
 
+#include <fmt/format.h>
+
 #include <tengine/util/cfgparse/parser.hpp>
 #include <tengine/util/logger/logger_macros.hpp>
-#include <fmt/format.h>
+#include <tengine/util/filesystem/recur_file_by_ext.hpp>
 
 namespace tengine::util{
 
@@ -29,35 +31,38 @@ bool CFGParser::parseRecursive(const std::filesystem::path& dir, std::vector<CFG
 
   TENGINE_LOG_INFO("CFGParser::parseRecursive()", fmt::format("Recursively parsing config files in: {}", dir.string()));
 
+  std::vector<std::filesystem::path> cfgFilePaths;
 
-  if(!std::filesystem::exists(dir)){
-    TENGINE_LOG_ERROR("CFGParser::parseRecursive()", fmt::format("Path {} passed does not exist!", dir.string()));
-    return false;
+  switch(tengine::util::recursiveFileByExtension(dir, cfgFilePaths, ext)){
+
+    case ERR_OK:
+      break;
+
+    case ERR_PATH_DOES_NOT_EXIST:
+      TENGINE_LOG_ERROR("CFGParser::parseRecursive()", fmt::format("Path {} passed does not exist!", dir.string()));
+      return false;
+
+    case ERR_PATH_NOT_DIR:
+      TENGINE_LOG_ERROR("CFGParser::parseRecursive()", fmt::format("Path {} passed is not a directory!", dir.string()));
+      return false;
+
+    default:
+      TENGINE_LOG_ERROR("CFGParser::parseRecursive()", "Unhandled case in switch-case");
+
   }
-  if(!std::filesystem::is_directory(dir)){
-    TENGINE_LOG_ERROR("CFGParser::parseRecursive()", fmt::format("Path {} passed is not a directory!", dir.string()));
-    return false;
-  }
 
-  for(const auto& entry : std::filesystem::recursive_directory_iterator(dir)) {
+  for(const auto& entry : cfgFilePaths){
 
-    if(entry.is_regular_file() && entry.path().extension() == ext){
+    std::ifstream file(entry);
 
-      TENGINE_LOG_DEBUG("CFGParser::parseRecursive()", fmt::format("Found tengine config file at: {}", entry.path().string()));
-
-      std::ifstream file(entry.path());
-
-      if(!file){
-        TENGINE_LOG_ERROR("CFGParser::parseRecursive()", fmt::format("Unable to open config file at: {}", entry.path().string()));
-        continue;
-      }
-
-      auto n = parse(file);
-      nodes.insert(nodes.end(), n.begin(), n.end());
-
-      TENGINE_LOG_DEBUG("CFGParser::parseRecursive()", fmt::format("Parsed tengine config file at: {}", entry.path().string()));
-
+    if(!file){
+      TENGINE_LOG_ERROR("CFGParser::parseRecursive()", fmt::format("Unable to open config file at: {}", entry.string()));
+      continue;
     }
+
+    auto n = parse(file);
+    nodes.insert(nodes.end(), n.begin(), n.end());
+    TENGINE_LOG_DEBUG("CFGParser::parseRecursive()", fmt::format("Parsed tengine config file at: {}", entry.string()));
 
   }
 

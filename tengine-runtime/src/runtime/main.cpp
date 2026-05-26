@@ -1,9 +1,15 @@
 #include <iostream>
 
-#include <runtime/init.hpp>
+#include <runtime/core/init.hpp>
+#include <runtime/core/RuntimeGlobals.hpp>
+
+
+truntime::RuntimeGlobalVariables runtimeGlobalVariables;
+truntime::RuntimeGlobalConstants runtimeGlobalConstants;
+
 
 int main(int argc, char* argv[]){
 
-  runtime::runtime_init();
+  truntime::runtimeInit(runtimeGlobalVariables, runtimeGlobalConstants);
 
 }
