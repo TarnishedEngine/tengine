@@ -47,6 +47,7 @@ set(RUNTIME_HEADERS
 
 set(RUNTIME_SOURCES
         src/runtime/main.cpp
+        src/runtime/core/init.cpp
 )
 
 add_executable(tengine_runtime ${RUNTIME_HEADERS} ${RUNTIME_SOURCES})
