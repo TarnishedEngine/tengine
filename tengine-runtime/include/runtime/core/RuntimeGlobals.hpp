@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <filesystem>
 
 #include <tengine/util/cfgparse/cfg_node.hpp>
 
@@ -24,6 +25,14 @@ struct RuntimeGlobalVariables{
   std::vector<tengine::util::CFGNode> configNodes;
 
   std::string TR_FILE_ASSOCIATION_CONFIG;
+  std::vector<std::filesystem::path> configSearchDir;
+
+};
+
+struct RuntimeGlobals{
+
+  RuntimeGlobalVariables vars;
+  RuntimeGlobalConstants consts;
 
 };
 

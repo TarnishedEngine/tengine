@@ -14,7 +14,7 @@ std::vector<CFGNode> CFGParser::parse(const std::string &input){
 
   std::stringstream ss(input);
   CFGNode parentNode;
-  parseScope(ss, parentNode);
+  m_parseScope(ss, parentNode);
   return parentNode.children;
 
 }
@@ -22,7 +22,7 @@ std::vector<CFGNode> CFGParser::parse(const std::string &input){
 std::vector<CFGNode> CFGParser::parse(std::istream &input){
 
   CFGNode parentNode;
-  parseScope(input, parentNode);
+  m_parseScope(input, parentNode);
   return parentNode.children;
 
 }
@@ -70,7 +70,7 @@ bool CFGParser::parseRecursive(const std::filesystem::path& dir, std::vector<CFG
 
 }
 
-void CFGParser::skipCommentsAndWS(std::istream &is){
+void CFGParser::m_skipCommentsAndWS(std::istream &is){
 
   while(true){
 
@@ -97,9 +97,9 @@ void CFGParser::skipCommentsAndWS(std::istream &is){
 
 }
 
-std::string CFGParser::readValue(std::istream& is){
+std::string CFGParser::m_readValue(std::istream& is){
 
-  skipCommentsAndWS(is);
+  m_skipCommentsAndWS(is);
 
   if(is.peek() == '"'){
 
@@ -116,13 +116,13 @@ std::string CFGParser::readValue(std::istream& is){
 
 }
 
-void CFGParser::parseScope(std::istream& is, CFGNode& currentNode){
+void CFGParser::m_parseScope(std::istream& is, CFGNode& currentNode){
 
   std::string token;
 
   while(true){
 
-    skipCommentsAndWS(is);
+    m_skipCommentsAndWS(is);
 
     if(is.peek() == '}'){
       is.get();
@@ -135,13 +135,13 @@ void CFGParser::parseScope(std::istream& is, CFGNode& currentNode){
 
       CFGNode child;
       child.nodeName = token.substr(0, token.size() - 1);
-      parseScope(is, child);
+      m_parseScope(is, child);
       currentNode.children.push_back(std::move(child));
       continue;
 
     }
 
-    skipCommentsAndWS(is);
+    m_skipCommentsAndWS(is);
 
     char nextChar = is.peek();
 
@@ -150,14 +150,14 @@ void CFGParser::parseScope(std::istream& is, CFGNode& currentNode){
       is.get();
       CFGNode child;
       child.nodeName = token;
-      parseScope(is, child);
+      m_parseScope(is, child);
       currentNode.children.push_back(std::move(child));
 
     }
     else if(nextChar == '='){
 
       is.get();
-      currentNode.values[token] = readValue(is);
+      currentNode.values[token] = m_readValue(is);
 
     }
 

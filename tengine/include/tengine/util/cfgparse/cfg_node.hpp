@@ -36,6 +36,14 @@ struct CFGNode{
 
   }
 
+  std::string getString(const std::string& key, std::string fallback = std::string()){
+
+    auto val = getStringValue(key);
+    if(!val) return fallback;
+    return std::string(*val);
+
+  }
+
   /***
    * @param key Key whose value to convert to an integer
    * @param fallback Fallback value in case key does not exist
@@ -104,6 +112,10 @@ struct CFGNode{
 
     return nodes;
 
+  }
+
+  CFGNode getChild(const std::string& key){
+    return getChildren(key).front();
   }
 
 };

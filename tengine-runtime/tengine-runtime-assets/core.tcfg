@@ -7,13 +7,13 @@ tr_core_config{
     // Directories to search for config files
     // Relative to the runtime executable
     search_path{
-        "path" = "tengine-runtime-assets"
+        path = "tengine-runtime-assets"
     }
 
     // File extension associations to make ('.' required)
     // - configFile: extension to use when searching for config files
     file_extensions{
-        "configFile" = ".tcfg"
+        configFile = ".tcfg"
     }
 
 }
