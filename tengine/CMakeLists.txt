@@ -33,8 +33,7 @@ set(TENGINE_BUILD_NOTES "Build notes not specified." CACHE STRING "Custom notes 
 set(TENGINE_LICENSE [[TarnishedEngine (c) 2026 DIY Labs
 TarnishedEngine is licensed under the MIT license
 ]])
-set(THIRDPARTY_LICENSES [[TarnishedEngine uses the following third-party software. For more details, pass the -l or --license flags
-cxxopts (https://github.com/jarro2783/cxxopts) by Jarryd Beck, licensed under the MIT license
+set(THIRDPARTY_LICENSES [[TarnishedEngine uses the following third-party software. For more details, see TENGINE_THIRDPARTY_LICENSES.md
 fmtlib (https://github.com/fmtlib/fmt) by Victor Zverovich and {fmt} contributors, licensed under the MIT license
 termcolor (https://github.com/ikalnytskyi/termcolor) by Ihor Kalnytskyi, all rights reserved
 ]])

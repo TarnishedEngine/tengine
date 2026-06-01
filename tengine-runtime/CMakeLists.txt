@@ -21,7 +21,7 @@ set(RUNTIME_BUILD_NOTES "Build notes not specified." CACHE STRING "Custom notes 
 set(RUNTIME_LICENSE [[Tarnished Runtime (c) 2026 DIY Labs
 Tarnished Runtime is licensed under the MIT license
 ]])
-set(THIRDPARTY_LICENSES [[Tarnished Runtime uses the following third-party software. For more details, pass the -l or --license flags
+set(THIRDPARTY_LICENSES [[Tarnished Runtime uses the following third-party software. For more details, see TRUNTIME_THIRDPARTY_LICENSES.md
 cxxopts (https://github.com/jarro2783/cxxopts) by Jarryd Beck, licensed under the MIT license
 fmtlib (https://github.com/fmtlib/fmt) by Victor Zverovich and {fmt} contributors, licensed under the MIT license
 termcolor (https://github.com/ikalnytskyi/termcolor) by Ihor Kalnytskyi, all rights reserved
